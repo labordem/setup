@@ -1,0 +1,16 @@
+{
+  "my-ngondestroy": {
+    "prefix": "ngondestroy",
+    "body": [
+      "",
+      "  private readonly ${1:isDestroyed$} = new Subject<boolean>();",
+      "",
+      "  ngOnDestroy(): void {",
+      "    this.${1:isDestroyed$}.next(true);",
+      "    this.${1:isDestroyed$}.complete();",
+      "  }",
+      ""
+    ],
+    "description": "Angular safe isDestroyed$ subject for takeUntil method"
+  }
+}

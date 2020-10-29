@@ -1,0 +1,8 @@
+[/]
+bold-is-bright=true
+default-size-columns=80
+font='Iosevka SS14 13'
+palette=['rgb(51,51,51)', 'rgb(213,65,65)', 'rgb(145,224,125)', 'rgb(253,230,155)', 'rgb(46,173,246)', 'rgb(171,132,255)', 'rgb(124,238,219)', 'rgb(223,238,255)', 'rgb(79,104,128)', 'rgb(213,65,65)', 'rgb(145,224,125)', 'rgb(253,230,155)', 'rgb(46,173,246)', 'rgb(255,173,203)', 'rgb(124,238,219)', 'rgb(223,238,255)']
+use-system-font=true
+use-theme-colors=true
+visible-name='gnome-colourful'

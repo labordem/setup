@@ -1,0 +1,41 @@
+// Place your key bindings in this file to override the defaults
+[
+  // Toggle terminal panel
+  {
+    "key": "alt+x",
+    "command": "workbench.action.togglePanel"
+  },
+  // Terminal split
+  {
+    "key": "alt+j",
+    "command": "workbench.action.terminal.splitInActiveWorkspace"
+  },
+  // Toggle terminal fullscreen
+  {
+    "key": "alt+f",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  // Wrap the current selected elements with html tags
+  {
+    "key": "alt+w",
+    "command": "editor.emmet.action.wrapWithAbbreviation",
+    "when": "editorHasSelection"
+  },
+  // (Extension) Insert ES6 template string `${}` in simple string
+  {
+    "key": "alt+[BracketRight]",
+    "command": "template-strings.insertArg",
+    "when": "editorTextFocus"
+  },
+  // (Extension) Insert console.log('selectedElement: ' + selectedElement)
+  {
+    "key": "cmd+shift+l",
+    "command": "extension.insertLogStatement",
+    "when": "editorTextFocus"
+  },
+  // (Extension) Jump between  Angular component files, switch back and forth to associated template
+  {
+    "key": "alt+q",
+    "command": "extension.ngQuickSwitchToggle"
+  }
+]
