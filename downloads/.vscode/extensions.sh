@@ -4,6 +4,7 @@ code --install-extension dkultasev.vs-code-snippet-generator
 code --install-extension EditorConfig.EditorConfig
 code --install-extension erhise.vs-ng-quick-switch
 code --install-extension esbenp.prettier-vscode
+code --install-extension fkrull.gtk-dark-titlebar
 code --install-extension funkyremi.vscode-google-translate
 code --install-extension ionutvmi.path-autocomplete
 code --install-extension johnpapa.Angular2

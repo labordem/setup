@@ -14,7 +14,7 @@
   "explorer.openEditors.visible": 0,
   // Custom fonts
   "editor.lineHeight": 19,
-  "editor.fontFamily": "Iosevka Nerd Font",
+  "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
   "terminal.integrated.fontSize": 13,
   "editor.fontWeight": "500",
   "terminal.integrated.fontWeight": "500",

@@ -6,8 +6,8 @@
   - [Gnome tweaks](#gnome-tweaks)
   - [Zsh theme](#zsh-theme)
   - [Github account](#github-account)
-  - [Visual Studio Code](#visual-studio-code)
   - [Node.js](#nodejs)
+  - [Visual Studio Code](#visual-studio-code)
   - [Android Studio](#android-studio)
   - [Nativescript](#nativescript)
   - [Docker](#docker)
@@ -29,38 +29,41 @@ sudo sh -c "echo 'fastestmirror=true' >> /etc/dnf/dnf.conf"
 sudo sh -c "echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf"
 sudo dnf upgrade -y
 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-flatpak remote-add -y --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo dnf install -y gnome-tweaks ffmpeg jq htop rsync
-exit
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo dnf install -y gnome-tweaks ffmpeg jq git-credential-libsecret seahorse && exit
 ```
 
 ## Monospace fonts
 
 ```bash
 # 🍎 osx
-mkdir -pv ~/Library/Fonts && cd ~/Library/Fonts
+mkdir -pv ~/Library/Fonts
+cd ~/Library/Fonts
 
 # 🐧 fedora
-mkdir -pv ~/.local/share/fonts && ~/.local/share/fonts
+mkdir -pv ~/.local/share/fonts
+cd ~/.local/share/fonts
 
 # 🐧🍎 fedora & osx
 mkdir Iosevka_Nerd_Font
+cd Iosevka_Nerd_Font
 IOSEVKA_URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka"
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Bold.ttf"          $IOSEVKA_URL/Bold/complete/Iosevka%20Bold%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Bold-Italic.ttf"   $IOSEVKA_URL/Bold-Italic/complete/Iosevka%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Light.ttf"         $IOSEVKA_URL/Light/complete/Iosevka%20Light%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Light-Italic.ttf"  $IOSEVKA_URL/Light-Italic/complete/Iosevka%20Light%20Italic%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Medium.ttf"        $IOSEVKA_URL/Medium/complete/Iosevka%20Medium%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Medium-Italic.ttf" $IOSEVKA_URL/Medium-Italic/complete/Iosevka%20Medium%20Italic%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Regular.ttf"       $IOSEVKA_URL/Regular/complete/Iosevka%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/Iosevka_Nerd_Font_Italic.ttf"        $IOSEVKA_URL/Italic/complete/Iosevka%20Italic%20Nerd%20Font%20Complete.ttf
-mkdir FiraCode_Nerd_Font
+curl -fLo "Iosevka_Nerd_Font_Bold.ttf"          $IOSEVKA_URL/Bold/complete/Iosevka%20Bold%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Bold-Italic.ttf"   $IOSEVKA_URL/Bold-Italic/complete/Iosevka%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Light.ttf"         $IOSEVKA_URL/Light/complete/Iosevka%20Light%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Light-Italic.ttf"  $IOSEVKA_URL/Light-Italic/complete/Iosevka%20Light%20Italic%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Medium.ttf"        $IOSEVKA_URL/Medium/complete/Iosevka%20Medium%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Medium-Italic.ttf" $IOSEVKA_URL/Medium-Italic/complete/Iosevka%20Medium%20Italic%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Regular.ttf"       $IOSEVKA_URL/Regular/complete/Iosevka%20Nerd%20Font%20Complete.ttf
+curl -fLo "Iosevka_Nerd_Font_Italic.ttf"        $IOSEVKA_URL/Italic/complete/Iosevka%20Italic%20Nerd%20Font%20Complete.ttf
+cd ..
+mkdir Firacode_Nerd_Font
+cd Firacode_Nerd_Font
 FURACODE_URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode"
-mkdir tmp && cd tmp
-curl -fLo "FiraCode_Nerd_Font/FiraCode_Nerd_Font_Bold.ttf"         $FURACODE_URL/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/FiraCode_Nerd_Font_Light.ttf"        $FURACODE_URL/Light/complete/Fira%20Code%20Light%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/FiraCode_Nerd_Font_Medium.ttf"       $FURACODE_URL/Medium/complete/Fira%20Code%20Medium%20Nerd%20Font%20Complete.ttf
-curl -fLo "FiraCode_Nerd_Font/FiraCode_Nerd_Font_Regular.ttf"      $FURACODE_URL/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf
+curl -fLo "Firacode_Nerd_Font_Bold.ttf"         $FURACODE_URL/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf
+curl -fLo "Firacode_Nerd_Font_Light.ttf"        $FURACODE_URL/Light/complete/Fira%20Code%20Light%20Nerd%20Font%20Complete.ttf
+curl -fLo "Firacode_Nerd_Font_Medium.ttf"       $FURACODE_URL/Medium/complete/Fira%20Code%20Medium%20Nerd%20Font%20Complete.ttf
+curl -fLo "Firacode_Nerd_Font_Regular.ttf"      $FURACODE_URL/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf
 cd
 ```
 
@@ -72,11 +75,10 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Iosevka Nerd Font
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.sound event-sounds false
-gsettings set org.gnome.nautilus.preferences always-use-location-entry true
 cd && curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf
 dconf load /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/ < gnome-terminal.dconf
 rm gnome-terminal.dconf
-cd && curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf/gnome-extensions.dconf
+cd && curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-extensions.dconf
 dconf load /org/gnome/shell/extensions/ < gnome-extensions.dconf
 rm gnome-extensions.dconf
 ```
@@ -106,7 +108,15 @@ source ~/.zshrc
 git config --global user.name miaborde
 git config --global user.email 38043788+mIaborde@users.noreply.github.com
 git config --global core.editor code
+# 🐧 fedora
 git config --global credential.helper libsecret
+```
+
+## Node.js
+
+```bash
+# 🐧 fedora
+nvm install --lts && nvm use --lts
 ```
 
 ## Visual Studio Code
@@ -117,7 +127,13 @@ brew cask install visual-studio-code
 mkdir -pv ~/Library/Application\ Support/Code/User && cd ~/Library/Application\ Support/Code/User
 
 # 🐧 fedora
-flatpak install -y flathub com.visualstudio.code
+sudo su
+# then
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+sudo dnf check-update
+sudo dnf install -y code
+exit
 mkdir -pv ~/.config/Code/User && cd ~/.config/Code/User
 
 # 🐧🍎 fedora & osx
@@ -130,13 +146,6 @@ cd
 > 🐧🍎 extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
 
 > 🐧🍎 if you want remove all vscode extensions : `rm -rf ~/.vscode/extensions`
-
-## Node.js
-
-```bash
-# 🐧 fedora
-nvm install --lts && nvm use --lts
-```
 
 ## Android Studio
 
