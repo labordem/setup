@@ -3,18 +3,19 @@
   "window.nativeTabs": true,
   "window.titleBarStyle": "native",
   "window.menuBarVisibility": "toggle",
-  "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
   "workbench.editor.highlightModifiedTabs": true,
   "explorer.sortOrder": "type",
   "explorer.compactFolders": false,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": false,
   "editor.cursorSmoothCaretAnimation": true,
-  "editor.renameOnType": true,
+  "editor.linkedEditing": true,
   "explorer.openEditors.visible": 0,
+  "terminal.integrated.tabs.enabled": false,
   // Custom fonts
   "editor.lineHeight": 19,
   "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
+  "debug.console.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
   "terminal.integrated.fontSize": 13,
   "editor.fontWeight": "500",
   "terminal.integrated.fontWeight": "500",
@@ -76,6 +77,8 @@
     "**/log/**": true
   },
   /* Extensions settings ------------------------------------------------------ */
+  // Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Code spell checker
   "cSpell.language": "en,fr",
   "cSpell.diagnosticLevel": "Hint",
@@ -85,13 +88,12 @@
   "material-icon-theme.hidesExplorerArrows": true,
   "material-icon-theme.showWelcomeMessage": false,
   "material-icon-theme.showReloadMessage": false,
-  "material-icon-theme.folders.color": "#608eb9",
   "material-icon-theme.files.associations": {
     "*.controller.ts": "nest-controller",
     "*.middleware.ts": "nest-middleware",
     "*.filter.ts": "nest-filter",
     "*.gateway.ts": "nest-gateway",
     "*.decorator.ts": "nest-decorator"
-  },
-  "window.zoomLevel": 0
+  }
+  /* Added after initial setup -------------------------------------------------- */
 }

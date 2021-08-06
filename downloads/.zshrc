@@ -11,23 +11,25 @@ COLOR_PRIMARY="004" # blue
 COLOR_DENIED="005" # magenta
 COLOR_STRING="006" # cyan
 COLOR_WHITE="015" # white
-# Oh-My-Zsh ------------------------------------------------------------------ #
-export ZSH="$HOME/.oh-my-zsh"
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
-plugins=(
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-nvm
-)
 # Powerlevel9k --------------------------------------------------------------- #
 ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE="nerdfont-complete"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 # Prompt segments
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user dir_writable dir vcs newline status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-ZLE_RPROMPT_INDENT=0 # Fix final space for right prompt
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon custom_host user dir dir_writable vcs newline status)
+# Separators ----------------------------------------------------------------- #
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B4'
+# POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B5'
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0BC '
+# POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\u2571 '
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0BA '
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\u2571 '
+POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B6'
+POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(node_version)
+# ZLE_RPROMPT_INDENT=0 # Fix final space for right prompt
 # Left prompt ---------------------------------------------------------------- #
 # OS icon
 POWERLEVEL9K_OS_ICON_FOREGROUND=$COLOR_WHITE
@@ -38,6 +40,12 @@ POWERLEVEL9K_ROOT_ICON="$'\uF6A4'" # 
 POWERLEVEL9K_SUDO_ICON=$'\uF09C'   # 
 POWERLEVEL9K_USER_DEFAULT_FOREGROUND=$COLOR_BLACK
 POWERLEVEL9K_USER_DEFAULT_BACKGROUND=$COLOR_PRIMARY
+# Host
+zsh_host(){
+    [[ $HOST == 'toolbox' || $HOST == 'dev' ]] && echo -n "%{%F{$COLOR_BLACK}%}\uf6a5 $HOST"
+}
+POWERLEVEL9K_CUSTOM_HOST="zsh_host"
+POWERLEVEL9K_CUSTOM_HOST_BACKGROUND=$COLOR_WHITE
 # Dir Writable
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=$COLOR_DENIED
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=$COLOR_BLACK
@@ -67,15 +75,18 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=$COLOR_DENIED
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=$COLOR_BLACK
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=$COLOR_WARNING
 # Right prompt --------------------------------------------------------------- #
-# # Custom dev
+# Custom dev
 POWERLEVEL9K_CUSTOM_DEV="echo $'\uF44F '" # 
 POWERLEVEL9K_CUSTOM_DEV_BACKGROUND=$COLOR_OK
 POWERLEVEL9K_CUSTOM_DEV_FOREGROUND=$COLOR_BLACK
-# # Versions
+# Versions
 POWERLEVEL9K_NODE_VERSION_BACKGROUND=$COLOR_BLACK
 POWERLEVEL9K_NODE_VERSION_FOREGROUND=$COLOR_OK
-# Zsh Syntax colors ---------------------------------------------------------- #
+# Oh-My-Zsh ------------------------------------------------------------------ #
+export ZSH="$HOME/.oh-my-zsh"
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+# Syntax highlighting plugin
 ZSH_HIGHLIGHT_STYLES[comment]='fg='$COLOR_OK
 ZSH_HIGHLIGHT_STYLES[alias]='fg='$COLOR_PRIMARY
 ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg='$COLOR_PRIMARY
@@ -91,7 +102,7 @@ ZSH_HIGHLIGHT_STYLES[path]='fg='$COLOR_STRING',underline'
 ZSH_HIGHLIGHT_STYLES[path_prefix]='fg='$COLOR_STRING',underline'
 ZSH_HIGHLIGHT_STYLES[path_approx]='fg='$COLOR_STRING',underline'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg='$COLOR_WARNING
-# ZSH_HIGHLIGHT_STYLES[history-expansion]='fg='$COLOR_STRING',bold'
+#ZSH_HIGHLIGHT_STYLES[history-expansion]='fg='$COLOR_STRING',bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg='$COLOR_WARNING
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg='$COLOR_WARNING
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg='$COLOR_STRING
@@ -100,7 +111,7 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg='$COLOR_STRING
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg='$COLOR_STRING
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg='$COLOR_STRING
 ZSH_HIGHLIGHT_STYLES[assign]='fg='$COLOR_WARNING
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg='$COLOR_COMMENTS
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg='$COLOR_COMMENTS
 # Aliases & functions -------------------------------------------------------- #
 alias x="exit"
 alias c="clear"
@@ -109,42 +120,23 @@ alias la="ls -A"
 alias ll="ls -l"
 alias lla="ls -lA"
 alias llh="ls -lh"
-alias tor="cd ~/Téléchargements/tor/tor-browser_en-US && ./start-tor-browser.desktop"
 cdp() { cd $YOUR_PROJECT_FOLDER"/$1" && ls -A }
 mkcd() { mkdir -p "$1" && cd "$1" }
 jcurl() { curl $@ | jq -C | less -R }
-rcp() { rsync -avhW --progress $1 $2 }
+rsp() { rsync -avhW --progress $1 $2 }
 ga() { git add . && gls }
 gm() { git merge $1 --no-commit }
 gls() {
-    echo "        build)    - Changes that affects build system or external dependencies (gulp, npm, webpack...)
-        ci)       - Changes to your CI configuration files and scripts (travis, circle...)
-        docs)     - Documentation only changes
-        feat)     - A new feature
-        fix)      - A bug fix
-        perf)     - A code change that improves performance
-        refactor) - A code change that neither fixes a bug nor adds a feature
-        test)     - Adding missing tests, refactoring tests
-        revert)   - Previous commit revert, it should begin with revert: followed by the header of the reverted commit"
-}
-gc() {
-    type=$1
-    scope=$2
-    message=$3
-    shift
-    case "$type" in
-        build)    git commit -m "build($scope): $message" ;;
-        ci)       git commit -m "ci($scope): $message"    ;;
-        docs)     git commit -m "docs($scope): $message" ;;
-        feat)     git commit -m "feat($scope): $message" ;;
-        fix)      git commit -m "fix($scope): $message" ;;
-        perf)     git commit -m "perf($scope): $message" ;;
-        refactor) git commit -m "refactor($scope): $message" ;;
-        test)     git commit -m "test($scope): $message" ;;
-        revert)   git commit -m "revert($scope): $message" ;;
-    *) echo "Unrecognized commit type: '$type'" >&2; ;;
-  esac
-  echo $commit
+    echo "👷 build ····· Changes that affect the build system or dependencies
+💻 ci ········ Changes to our CI configuration files and scripts
+📖 docs ······ Documentation only changes
+✨ feat ······ New feature [minor version: 0.v.0]
+🐛 fix ······· Bug fix [patch version: 0.0.v]
+📈 perf ······ Change that improves performance
+🏗  refactor ·· Change that neither fixes a bug nor adds a feature
+🚀 release ··· A new project version
+🔥 revert ···· Revert, must contains reverted commit header
+🚨 test ······ Adding missing tests or correcting existing tests"
 }
 glog() { git log --graph --abbrev-commit --decorate --date=relative --all }
 glg() { git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' }
@@ -154,10 +146,4 @@ open() {
     xdg-open "$1" 2>/dev/null || gnome-open "$1" 2>/dev/null || open "$1" 2>/dev/null \
     echo "You need xdg-open, gnome-open or open to use this alias..."
 }
-# Others --------------------------------------------------------------------- #
-export CHROME_BIN="/usr/bin/chromium"
-export ANDROID_HOME="$HOME/Android/Sdk"
-export JAVA_HOME=$(update-alternatives --query javac | sed -n -e 's/Best: *\(.*\)\/bin\/javac/\1/p')
-PATH="$PATH:$ANDROID_HOME/tools; PATH=$PATH:$ANDROID_HOME/platform-tools"
-alias android="$ANDROID_HOME/tools/android"
-alias emulator="$ANDROID_HOME/tools/emulator"
+# Added after initial setup -------------------------------------------------- #
