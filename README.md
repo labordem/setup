@@ -26,12 +26,9 @@ sudo hostnamectl set-hostname thinkpad
 sudo sh -c "echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf"
 sudo dnf upgrade -y
 sudo dnf install -y \
-    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-    git-credential-libsecret \
-    gnome-tweaks \
-    chromium \
-    ffmpeg \
-    jq \
+  "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+  git git-credential-libsecret ffmpeg jq htop rsync  google-noto-emoji-color-fonts \
+  gnome-tweaks chromium
 sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 exit
@@ -85,6 +82,7 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Iosevka Nerd Font
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.sound event-sounds false
+gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.mutter dynamic-workspaces false
@@ -92,7 +90,9 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 3
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4000
 cd && curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf
-dconf load /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/ < gnome-terminal.dconf
+gprofile=$(gsettings get org.gnome.Terminal.ProfilesList default)
+gprofile=${gprofile:1:-1}
+dconf load /org/gnome/terminal/legacy/profiles:/:$gprofile/ < gnome-terminal.dconf
 rm gnome-terminal.dconf
 
 ```
@@ -105,15 +105,16 @@ sudo dnf install -y zsh && sudo usermod --shell /bin/zsh $USER
 
 # 🐧🍎 fedora & osx
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# then
+# then from zsh
 git clone https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-cd && rm .zshrc
-curl -fLo '.zshrc' https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.zshrc
+curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.zshrc > ~/.zshrc
 source ~/.zshrc
 
 ```
+
+> 🐧 ZSH is now your default shell, but this change will only take effect after a first reboot. You don't necessarily need to do this right away, but stick with ZSH for the next steps!
 
 ## Node.js
 
@@ -129,6 +130,8 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | $SHELL
 source ~/.zshrc
 nvm install --lts && nvm use --lts
 
+# 🐧🍎 fedora & osx
+curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/run-nvm-use-when-nvmrc-found.sh >> ~/.zshrc
 ```
 
 ## Visual Studio Code
@@ -155,6 +158,8 @@ curl -fsSL https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.vsco
 cd
 
 ```
+
+> 🐧🍎 ignore extensions warnings...
 
 > 🐧🍎 extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
 
@@ -201,7 +206,7 @@ open https://docs.docker.com/get-docker/ # choose os and follow procedure
 # 🐧 fedora
 sudo su
 # then
-sudo dnf install docker docker-compose
+sudo dnf install -y docker docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
 sudo systemctl start docker

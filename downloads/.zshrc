@@ -35,12 +35,16 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(node_version)
 POWERLEVEL9K_OS_ICON_FOREGROUND=$COLOR_WHITE
 POWERLEVEL9K_OS_ICON_BACKGROUND=$COLOR_BLACK
 # User
-POWERLEVEL9K_USER_ICON=$'\uF007'   # 
-POWERLEVEL9K_ROOT_ICON="$'\uF6A4'" # 
-POWERLEVEL9K_SUDO_ICON=$'\uF09C'   # 
+POWERLEVEL9K_USER_ICON=$'\uF007' # 
+POWERLEVEL9K_ROOT_ICON=$'\uF6A4' # 
+POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
 POWERLEVEL9K_USER_DEFAULT_FOREGROUND=$COLOR_BLACK
 POWERLEVEL9K_USER_DEFAULT_BACKGROUND=$COLOR_PRIMARY
-# Host
+POWERLEVEL9K_USER_ROOT_FOREGROUND=$COLOR_BLACK
+POWERLEVEL9K_USER_ROOT_BACKGROUND=$COLOR_DENIED
+POWERLEVEL9K_USER_SUDO_FOREGROUND=$COLOR_BLACK
+POWERLEVEL9K_USER_SUDO_BACKGROUND=$COLOR_DENIED
+# Custom Host
 zsh_host(){
     [[ $HOST == 'toolbox' || $HOST == 'dev' ]] && echo -n "%{%F{$COLOR_BLACK}%}\uf6a5 $HOST"
 }
@@ -85,6 +89,7 @@ POWERLEVEL9K_NODE_VERSION_FOREGROUND=$COLOR_OK
 # Oh-My-Zsh ------------------------------------------------------------------ #
 export ZSH="$HOME/.oh-my-zsh"
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+DISABLE_MAGIC_FUNCTIONS=true
 source $ZSH/oh-my-zsh.sh
 # Syntax highlighting plugin
 ZSH_HIGHLIGHT_STYLES[comment]='fg='$COLOR_OK
@@ -143,7 +148,6 @@ glg() { git log --graph --abbrev-commit --decorate --format=format:'%C(bold yell
 gh() { open "https://github.com/$YOUR_GITHUB_USERNAME/$1?tab=repositories" }
 ghls() { curl "https://api.github.com/users/$YOUR_GITHUB_USERNAME/repos" -s | jq '[.[].svn_url]' }
 open() {
-    xdg-open "$1" 2>/dev/null || gnome-open "$1" 2>/dev/null || open "$1" 2>/dev/null \
-    echo "You need xdg-open, gnome-open or open to use this alias..."
+    xdg-open "$*" 2>/dev/null || command open "$*"
 }
 # Added after initial setup -------------------------------------------------- #

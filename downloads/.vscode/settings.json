@@ -1,4 +1,7 @@
 {
+  /* -------------------------------------------------------------------------- */
+  /*                                    Base                                    */
+  /* -------------------------------------------------------------------------- */
   // Window & layout
   "window.nativeTabs": true,
   "window.titleBarStyle": "native",
@@ -8,33 +11,31 @@
   "explorer.compactFolders": false,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": false,
+  "explorer.openEditors.visible": 0,
+  // Editor config
   "editor.cursorSmoothCaretAnimation": true,
   "editor.linkedEditing": true,
-  "explorer.openEditors.visible": 0,
-  "terminal.integrated.tabs.enabled": false,
-  // Custom fonts
-  "editor.lineHeight": 19,
-  "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
-  "debug.console.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
-  "terminal.integrated.fontSize": 13,
-  "editor.fontWeight": "500",
-  "terminal.integrated.fontWeight": "500",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 15,
-  // Code format
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
   "files.insertFinalNewline": true,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  // Actions on save
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
-    "source.fixAll": true,
-    "source.addMissingImports": true
+    "source.addMissingImports": true,
+    "source.organizeImports": true
   },
+  // Terminal panel
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.tabs.enabled": false,
+  "workbench.panel.defaultLocation": "right",
+  // Custom fonts
+  "editor.lineHeight": 19,
+  "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
+  "debug.console.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
+  "terminal.integrated.fontSize": 13,
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
   // Telemetry & updates
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
@@ -43,46 +44,15 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.enableExperiments": false,
   "extensions.autoCheckUpdates": false,
-  // Exlusions
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/dist/**": true,
-    "**/log/**": true,
-    "**/logs/**": true,
-    "**/.fdk/**": true
-  },
-  "search.exclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/dist/**": true,
-    "**/log/**": true
-  },
-  /* Extensions settings ------------------------------------------------------ */
+  /* -------------------------------------------------------------------------- */
+  /*                                 Extensions                                 */
+  /* -------------------------------------------------------------------------- */
   // Prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Code spell checker
   "cSpell.language": "en,fr",
   "cSpell.diagnosticLevel": "Hint",
-  "cSpell.userWords": ["signin", "signup", "aujourd'hui", "sidenav", "navbar"],
+  "cSpell.userWords": ["aujourd'hui", "navbar", "scrollbar", "sidenav"],
   // Material icon theme
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.hidesExplorerArrows": true,
@@ -94,6 +64,15 @@
     "*.filter.ts": "nest-filter",
     "*.gateway.ts": "nest-gateway",
     "*.decorator.ts": "nest-decorator"
-  }
-  /* Added after initial setup -------------------------------------------------- */
+  },
+  // Google translate
+  "google-translate.firstLanguage": "en",
+  "google-translate.secondLanguage": "fr",
+  // Footsteps
+  "footsteps.highlightColorMaxOpacity": 0.2,
+  "footsteps.highlightColor": "rgb(0, 0, 0)",
+  /* -------------------------------------------------------------------------- */
+  /*                                New settings                                */
+  /* -------------------------------------------------------------------------- */
+  "": ""
 }

@@ -21,6 +21,18 @@
     "command": "editor.emmet.action.wrapWithAbbreviation",
     "when": "editorHasSelection"
   },
+  // allow duplicate line up on Linux
+  {
+    "key": "shift+alt+up",
+    "command": "editor.action.copyLinesUpAction",
+    "when": "editorTextFocus && !editorReadOnly && isLinux"
+  },
+  // allow duplicate line down on Linux
+  {
+    "key": "shift+alt+down",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadOnly && isLinux"
+  },
   // (Extension) Insert ES6 template string `${}` in simple string
   {
     "key": "alt+[BracketRight]",

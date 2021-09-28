@@ -7,6 +7,7 @@ code --install-extension ebrithil30.vscode-ts-auto-return-type
 code --install-extension EditorConfig.EditorConfig
 code --install-extension erhise.vs-ng-quick-switch
 code --install-extension esbenp.prettier-vscode
+code --install-extension fkrull.gtk-dark-titlebar
 code --install-extension hancel.google-translate
 code --install-extension ionutvmi.path-autocomplete
 code --install-extension johnpapa.Angular2
@@ -17,7 +18,6 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension ms-vscode-remote.remote-ssh-edit
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension natewallace.angular2-inline
 code --install-extension P-de-Jong.vscode-html-scss
 code --install-extension piotrpalarz.vscode-gitignore-generator
