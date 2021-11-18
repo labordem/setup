@@ -1,5 +1,4 @@
 # Your variables ------------------------------------------------------------- #
-YOUR_GITHUB_USERNAME="miaborde"
 YOUR_PROJECT_FOLDER="$HOME/Projets"
 # Colors --------------------------------------------------------------------- #
 # https://user-images.githubusercontent.com/704406/43988708-64c0fa52-9d4c-11e8-8cf9-c4d4b97a5200.png
@@ -12,11 +11,13 @@ COLOR_DENIED="005" # magenta
 COLOR_STRING="006" # cyan
 COLOR_WHITE="015" # white
 # Powerlevel9k --------------------------------------------------------------- #
+ZSH_DISABLE_COMPFIX=true
 ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE="nerdfont-complete"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Prompt segments
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon custom_host user dir dir_writable vcs newline status)
 # Separators ----------------------------------------------------------------- #
@@ -127,10 +128,6 @@ alias lla="ls -lA"
 alias llh="ls -lh"
 cdp() { cd $YOUR_PROJECT_FOLDER"/$1" && ls -A }
 mkcd() { mkdir -p "$1" && cd "$1" }
-jcurl() { curl $@ | jq -C | less -R }
-rsp() { rsync -avhW --progress $1 $2 }
-ga() { git add . && gls }
-gm() { git merge $1 --no-commit }
 gls() {
     echo "👷 build ····· Changes that affect the build system or dependencies
 💻 ci ········ Changes to our CI configuration files and scripts
@@ -145,8 +142,6 @@ gls() {
 }
 glog() { git log --graph --abbrev-commit --decorate --date=relative --all }
 glg() { git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' }
-gh() { open "https://github.com/$YOUR_GITHUB_USERNAME/$1?tab=repositories" }
-ghls() { curl "https://api.github.com/users/$YOUR_GITHUB_USERNAME/repos" -s | jq '[.[].svn_url]' }
 open() {
     xdg-open "$*" 2>/dev/null || command open "$*"
 }

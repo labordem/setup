@@ -1,6 +1,10 @@
+# Loads nvm on zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # Loads .nvmrc file automatically whenever you enter a directory that contains an .nvmrc file
 # Place this AFTER nvm initialization!
-POWERLEVEL9K_INSTANT_PROMPT=quiet
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"

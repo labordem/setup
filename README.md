@@ -1,6 +1,8 @@
-# Set up dev machine
+# Setup
 
-- [Set up dev machine](#set-up-dev-machine)
+🐧 **Fedora** & 🍎 **OSX** commands to set up a dev environment.
+
+- [Setup](#setup)
   - [Post-install & essential apps](#post-install--essential-apps)
   - [Git](#git)
   - [Monospace fonts](#monospace-fonts)
@@ -13,52 +15,75 @@
 
 ## Post-install & essential apps
 
-```bash
-# 🍎 osx
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | $SHELL
-brew cask install firefox google-chrome
-brew install jq htop
+> 🍎 Install [XCode](https://itunes.apple.com/us/app/xcode/id497799835), run it and install additional requirements.
 
-# 🐧 fedora
-sudo su
-# then
-sudo hostnamectl set-hostname thinkpad
+```bash
+YOUR_HOSTNAME=thinkpad
+
+if [[ $(uname -s) == Linux* ]]; then
+
+sudo hostnamectl set-hostname $YOUR_HOSTNAME
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 sudo sh -c "echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf"
 sudo dnf upgrade -y
+sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
 sudo dnf install -y \
-  "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
-  git git-credential-libsecret ffmpeg jq htop rsync  google-noto-emoji-color-fonts \
-  gnome-tweaks chromium
+    ffmpeg \
+    git git-credential-libsecret \
+    jq htop rsync \
+    google-noto-emoji-color-fonts \
+    gnome-tweaks chromium
+git config --global credential.helper libsecret
 sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-exit
+
+elif [[ $(uname -s) == Darwin* ]]; then
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install --cask firefox google-chrome
+brew install jq htop
+
+else
+
+echo "Unsupported OS."
+exit 1
+
+fi
 
 ```
 
 ## Git
 
 ```bash
-# 🐧 fedora
-git config --global credential.helper libsecret
+YOUR_GITHUB_USERNAME=miaborde
+YOUR_GITHUB_EMAIL=38043788+mIaborde@users.noreply.github.com
 
-# 🐧🍎 fedora & osx
-git config --global user.name miaborde
-git config --global user.email 38043788+mIaborde@users.noreply.github.com
+git config --global user.name $YOUR_GITHUB_USERNAME
+git config --global user.email $YOUR_GITHUB_EMAIL
 
 ```
+
+> 🍎 Clone your first repositories with the native OSX Terminal application to initialize Github/GitLab keys in the Apple Keychain Acces.
 
 ## Monospace fonts
 
 ```bash
-# 🍎 osx
-mkdir -pv ~/Library/Fonts
-cd ~/Library/Fonts
+if [[ $(uname -s) == Linux* ]]; then
 
-# 🐧 fedora
 mkdir -pv ~/.local/share/fonts
 cd ~/.local/share/fonts
 
-# 🐧🍎 fedora & osx
+elif [[ $(uname -s) == Darwin* ]]; then
+
+mkdir -pv ~/Library/Fonts
+cd ~/Library/Fonts
+
+else
+
+echo "Unsupported OS."
+exit 1
+
+fi
+
 mkdir Iosevka_Nerd_Font
 cd Iosevka_Nerd_Font
 IOSEVKA_URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka"
@@ -77,11 +102,12 @@ cd
 ## Gnome tweaks
 
 ```bash
-# 🐧 fedora
-gsettings set org.gnome.desktop.interface monospace-font-name 'Iosevka Nerd Font 12'
+if [[ $(uname -s) == Linux* ]]; then
+
+cd
+gsettings set org.gnome.desktop.interface monospace-font-name 'Iosevka 12'
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
-gsettings set org.gnome.desktop.sound event-sounds false
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -89,28 +115,42 @@ gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 3
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4000
-cd && curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf
+curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf
 gprofile=$(gsettings get org.gnome.Terminal.ProfilesList default)
 gprofile=${gprofile:1:-1}
 dconf load /org/gnome/terminal/legacy/profiles:/:$gprofile/ < gnome-terminal.dconf
 rm gnome-terminal.dconf
+
+else
+
+echo "Not required in this OS."
+exit 1
+
+fi
 
 ```
 
 ## Terminal
 
 ```bash
-# 🐧 fedora
-sudo dnf install -y zsh && sudo usermod --shell /bin/zsh $USER
+if [[ $(uname -s) == Linux* ]]; then
 
-# 🐧🍎 fedora & osx
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# then from zsh
-git clone https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+sudo dnf install -y zsh
+sudo usermod --shell /bin/zsh $USER
+
+fi
+
+RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/romkatv/powerlevel10k ~/.oh-my-zsh/custom/themes/powerlevel10k
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.zshrc > ~/.zshrc
-source ~/.zshrc
+
+if [[ $(uname -s) == Linux* ]]; then
+
+zsh
+
+fi
 
 ```
 
@@ -119,39 +159,37 @@ source ~/.zshrc
 ## Node.js
 
 ```bash
-# 🍎 osx
-brew install nvm && mkdir ~/.nvm
-echo "export NVM_DIR=~/.nvm" >> ~/.zshrc
-source ~/.zshrc
-nvm install --lts && nvm use --lts
 
-# 🐧 fedora
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | $SHELL
-source ~/.zshrc
-nvm install --lts && nvm use --lts
-
-# 🐧🍎 fedora & osx
+curl -fsSL https://raw.githubusercontent.com/creationix/nvm/master/install.sh | zsh
 curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/run-nvm-use-when-nvmrc-found.sh >> ~/.zshrc
+source ~/.zshrc
+nvm install --lts && nvm use --lts
+
 ```
 
 ## Visual Studio Code
 
 ```bash
-# 🍎 osx
-brew cask install visual-studio-code
-mkdir -pv ~/Library/Application\ Support/Code/User && cd ~/Library/Application\ Support/Code/User
+if [[ $(uname -s) == Linux* ]]; then
 
-# 🐧 fedora
-sudo su
-# then
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 sudo dnf check-update
 sudo dnf install -y code
-exit
 mkdir -pv ~/.config/Code/User && cd ~/.config/Code/User
 
-# 🐧🍎 fedora & osx
+elif [[ $(uname -s) == Darwin* ]]; then
+
+brew cask install visual-studio-code
+mkdir -pv ~/Library/Application\ Support/Code/User && cd ~/Library/Application\ Support/Code/User
+
+else
+
+echo "Unsupported OS."
+exit 1
+
+fi
+
 curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.vscode/settings.json
 curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.vscode/keybindings.json
 curl -fsSL https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.vscode/extensions.sh | $SHELL
@@ -159,37 +197,45 @@ cd
 
 ```
 
-> 🐧🍎 ignore extensions warnings...
+> 🐧🍎 Ignore extensions warnings...
 
-> 🐧🍎 extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
+> 🐧🍎 Extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
 
-> 🐧🍎 if you want remove all vscode extensions : `rm -rf ~/.vscode/extensions`
+> 🐧🍎 If you want remove all vscode extensions : `rm -rf ~/.vscode/extensions`
 
 ## Android Studio
 
 ```bash
-# 🍎 osx
-brew tap AdoptOpenJDK/openjdk
-brew cask install adoptopenjdk8 android-studio
-echo "\n" >> ~/.zshrc
-echo "export ANDROID_HOME=$HOME/Library/Android/sdk" >> ~/.zshrc
-echo "export PATH=$PATH:$ANDROID_HOME/platform-tools" >> ~/.zshrc
-echo "\n" >> ~/.zshrc
-source ~/.zshrc
+if [[ $(uname -s) == Linux* ]]; then
 
-# 🐧 fedora
 sudo dnf install -y java-1.8.0-openjdk-devel
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.google.AndroidStudio
-echo "\n" >> ~/.zshrc
-echo "export ANDROID_HOME=$HOME/Android/Sdk" >> ~/.zshrc
-echo "export PATH=$PATH:$ANDROID_HOME/platform-tools" >> ~/.zshrc
-echo "\n" >> ~/.zshrc
+echo '\n' >> ~/.zshrc
+echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.zshrc
+echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools' >> ~/.zshrc
+echo '\n' >> ~/.zshrc
 source ~/.zshrc
+
+elif [[ $(uname -s) == Darwin* ]]; then
+
+brew install --cask adoptopenjdk8 android-studio
+echo '\n' >> ~/.zshrc
+echo 'export ANDROID_HOME=$HOME/Library/Android/sdk' >> ~/.zshrc
+echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools' >> ~/.zshrc
+echo '\n' >> ~/.zshrc
+source ~/.zshrc
+
+else
+
+echo "Unsupported OS."
+exit 1
+
+fi
 
 ```
 
-**🐧🍎 fedora & osx :**
+**🐧🍎 Additional steps:**
 
 - Launch Android Studio and choose not to import any settings.
 - Press "Next" button to continue, choose Standard setup and download all default packages
@@ -200,19 +246,26 @@ source ~/.zshrc
 ## Docker
 
 ```bash
-# 🍎 osx
-open https://docs.docker.com/get-docker/ # choose os and follow procedure
+if [[ $(uname -s) == Linux* ]]; then
 
-# 🐧 fedora
-sudo su
-# then
 sudo dnf install -y docker docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
 sudo systemctl start docker
 sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-firewall-cmd --zone=FedoraWorkstation --add-masquerade --permanent
-# then
-reboot
+sudo firewall-cmd --zone=FedoraWorkstation --add-masquerade --permanent
+
+elif [[ $(uname -s) == Darwin* ]]; then
+
+brew install --cask docker
+
+else
+
+echo "Unsupported OS."
+exit 1
+
+fi
 
 ```
+
+> 🐧 Docker can now run without root permissions, but this change will only take effect after a first reboot.

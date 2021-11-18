@@ -37,7 +37,7 @@
   "editor.fontLigatures": true,
   "editor.fontSize": 15,
   // Telemetry & updates
-  "telemetry.enableCrashReporter": false,
+  "telemetry.telemetryLevel": "off",
   "telemetry.enableTelemetry": false,
   "update.mode": "manual",
   "extensions.autoUpdate": false,

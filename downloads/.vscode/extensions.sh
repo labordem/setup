@@ -7,7 +7,6 @@ code --install-extension ebrithil30.vscode-ts-auto-return-type
 code --install-extension EditorConfig.EditorConfig
 code --install-extension erhise.vs-ng-quick-switch
 code --install-extension esbenp.prettier-vscode
-code --install-extension fkrull.gtk-dark-titlebar
 code --install-extension hancel.google-translate
 code --install-extension ionutvmi.path-autocomplete
 code --install-extension johnpapa.Angular2
@@ -36,3 +35,9 @@ code --install-extension whtouche.vscode-js-console-utils
 code --install-extension xabikos.JavaScriptSnippets
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension ZaferAYAN.lorem-picsum
+
+if [[ $(uname -s) == Linux* ]] ; then
+
+code --install-extension fkrull.gtk-dark-titlebar
+
+fi
