@@ -4,16 +4,17 @@
   /* -------------------------------------------------------------------------- */
   // Window & layout
   "window.nativeTabs": true,
-  "window.titleBarStyle": "native",
-  "window.menuBarVisibility": "toggle",
-  "workbench.editor.highlightModifiedTabs": true,
+  "window.menuBarVisibility": "hidden",
+  "window.confirmBeforeClose": "keyboardOnly",
   "explorer.sortOrder": "type",
   "explorer.compactFolders": false,
-  "editor.minimap.enabled": false,
+  "editor.minimap.enabled": true,
+  "editor.minimap.side": "left",
   "editor.minimap.renderCharacters": false,
   "explorer.openEditors.visible": 0,
   // Editor config
   "editor.cursorSmoothCaretAnimation": true,
+  "editor.bracketPairColorization.enabled": false,
   "editor.linkedEditing": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
@@ -29,6 +30,7 @@
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.tabs.enabled": false,
   "workbench.panel.defaultLocation": "right",
+  "terminal.integrated.gpuAcceleration": "canvas",
   // Custom fonts
   "editor.lineHeight": 19,
   "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
@@ -38,7 +40,6 @@
   "editor.fontSize": 15,
   // Telemetry & updates
   "telemetry.telemetryLevel": "off",
-  "telemetry.enableTelemetry": false,
   "update.mode": "manual",
   "extensions.autoUpdate": false,
   "workbench.settings.enableNaturalLanguageSearch": false,

@@ -1,51 +1,51 @@
 // Place your key bindings in this file to override the defaults
 [
-  // Toggle terminal panel
+  // Toggle terminal panel.
   {
     "key": "alt+x",
     "command": "workbench.action.togglePanel"
   },
-  // Terminal split
+  // Terminal split.
   {
     "key": "alt+j",
     "command": "workbench.action.terminal.splitInActiveWorkspace"
   },
-  // Toggle terminal fullscreen
+  // Toggle terminal fullscreen.
   {
     "key": "alt+f",
     "command": "workbench.action.toggleMaximizedPanel"
   },
-  // Wrap the current selected elements with html tags
+  // Wrap the current selected elements with html tags.
   {
     "key": "alt+w",
     "command": "editor.emmet.action.wrapWithAbbreviation",
     "when": "editorHasSelection"
   },
-  // allow duplicate line up on Linux
+  // (Mac) Allow duplicate line up on Linux.
   {
     "key": "shift+alt+up",
     "command": "editor.action.copyLinesUpAction",
     "when": "editorTextFocus && !editorReadOnly && isLinux"
   },
-  // allow duplicate line down on Linux
+  // (Mac) Allow duplicate line down on Linux.
   {
     "key": "shift+alt+down",
     "command": "editor.action.copyLinesDownAction",
     "when": "editorTextFocus && !editorReadOnly && isLinux"
   },
-  // (Extension) Insert ES6 template string `${}` in simple string
+  // (Mac) Allow save all file like Mac on Linux and Windows.
   {
-    "key": "alt+[BracketRight]",
-    "command": "template-strings.insertArg",
-    "when": "editorTextFocus"
+    "key": "ctrl+shift+s",
+    "command": "workbench.action.files.saveAll",
+    "when": "isLinux || isWindows"
   },
-  // (Extension) Insert console.log('selectedElement: ' + selectedElement)
+  // (Extension) Insert console.log('selectedElement: ' + selectedElement).
   {
     "key": "cmd+shift+l",
     "command": "extension.insertLogStatement",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadOnly"
   },
-  // (Extension) Jump between  Angular component files, switch back and forth to associated template
+  // (Extension) Jump between  Angular component files, switch back and forth to associated template.
   {
     "key": "alt+q",
     "command": "extension.ngQuickSwitchToggle"

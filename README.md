@@ -26,21 +26,17 @@ sudo hostnamectl set-hostname $YOUR_HOSTNAME
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 sudo sh -c "echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf"
 sudo dnf upgrade -y
-sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
 sudo dnf install -y \
-    ffmpeg \
-    git git-credential-libsecret \
-    jq htop rsync \
-    google-noto-emoji-color-fonts \
-    gnome-tweaks chromium
-git config --global credential.helper libsecret
+    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    && sudo dnf install -y ffmpeg
+sudo dnf install -y jq htop rsync chromium
 sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 
 elif [[ $(uname -s) == Darwin* ]]; then
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install --cask firefox google-chrome
-brew install jq htop
+brew install jq htop coreutils
 
 else
 
@@ -56,6 +52,13 @@ fi
 ```bash
 YOUR_GITHUB_USERNAME=miaborde
 YOUR_GITHUB_EMAIL=38043788+mIaborde@users.noreply.github.com
+
+if [[ $(uname -s) == Linux* ]]; then
+
+sudo dnf install -y git git-credential-libsecret
+git config --global credential.helper libsecret
+
+fi
 
 git config --global user.name $YOUR_GITHUB_USERNAME
 git config --global user.email $YOUR_GITHUB_EMAIL
@@ -111,10 +114,11 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
-gsettings set org.gnome.mutter dynamic-workspaces false
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 3
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4000
+gsettings set org.gnome.desktop.session idle-delay 900
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
 curl -fsSLO https://raw.githubusercontent.com/mIaborde/setup/main/downloads/gnome-terminal.dconf
 gprofile=$(gsettings get org.gnome.Terminal.ProfilesList default)
 gprofile=${gprofile:1:-1}
@@ -144,6 +148,7 @@ RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/
 git clone https://github.com/romkatv/powerlevel10k ~/.oh-my-zsh/custom/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/supercrabtree/k ~/.oh-my-zsh/custom/plugins/k
 curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/.zshrc > ~/.zshrc
 
 if [[ $(uname -s) == Linux* ]]; then
@@ -159,8 +164,7 @@ fi
 ## Node.js
 
 ```bash
-
-curl -fsSL https://raw.githubusercontent.com/creationix/nvm/master/install.sh | zsh
+curl -fsSL https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 curl https://raw.githubusercontent.com/mIaborde/setup/main/downloads/run-nvm-use-when-nvmrc-found.sh >> ~/.zshrc
 source ~/.zshrc
 nvm install --lts && nvm use --lts
@@ -219,7 +223,8 @@ source ~/.zshrc
 
 elif [[ $(uname -s) == Darwin* ]]; then
 
-brew install --cask adoptopenjdk8 android-studio
+brew tap AdoptOpenJDK/openjdk
+brew install --cask android-studio adoptopenjdk15
 echo '\n' >> ~/.zshrc
 echo 'export ANDROID_HOME=$HOME/Library/Android/sdk' >> ~/.zshrc
 echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools' >> ~/.zshrc
