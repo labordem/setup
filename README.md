@@ -15,7 +15,9 @@
 
 ## Post-install & essential apps
 
-> 🍎 Install [XCode](https://itunes.apple.com/us/app/xcode/id497799835), run it and install additional requirements.
+🍎 On OSX start to update OS and install [XCode](https://itunes.apple.com/us/app/xcode/id497799835), run it and accept additional requirements installation.
+
+> 🐧🍎 Change `YOUR_HOSTNAME=thinkpad` by `YOUR_HOSTNAME=${yourHostname}` in following command block.
 
 ```bash
 YOUR_HOSTNAME=thinkpad
@@ -36,7 +38,10 @@ elif [[ $(uname -s) == Darwin* ]]; then
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install --cask firefox google-chrome
-brew install jq htop coreutils
+brew install jq coreutils
+echo '\n' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.zshrc
+echo '\n' >> ~/.zshrc
 
 else
 
@@ -48,6 +53,8 @@ fi
 ```
 
 ## Git
+
+> 🐧🍎 Change `YOUR_GITHUB_USERNAME` and `YOUR_GITHUB_EMAIL` by your values in following command block.
 
 ```bash
 YOUR_GITHUB_USERNAME=miaborde
@@ -201,11 +208,12 @@ cd
 
 ```
 
-> 🐧🍎 Ignore extensions warnings...
+> - 🐧🍎 Ignore extensions warnings...
 
-> 🐧🍎 Extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
-
-> 🐧🍎 If you want remove all vscode extensions : `rm -rf ~/.vscode/extensions`
+> **Tips:**
+>
+> - 🐧🍎 Extensions exported with : `code --list-extensions | xargs -L 1 echo code --install-extension > downloads/.vscode/extensions.sh`
+> - 🐧🍎 If you want to remove all vscode extensions : `rm -rf ~/.vscode/extensions`
 
 ## Android Studio
 

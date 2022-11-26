@@ -1,53 +1,120 @@
-// Place your key bindings in this file to override the defaults
 [
-  // Toggle terminal panel.
+  /* ----------------------------- Window & layout ---------------------------- */
+  {
+    "key": "cmd+q",
+    "command": "isMac"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.files.saveAll",
+    "when": "!isMac"
+  },
+  /* ----------------------------- Terminal panel ----------------------------- */
   {
     "key": "alt+x",
     "command": "workbench.action.togglePanel"
   },
-  // Terminal split.
   {
     "key": "alt+j",
     "command": "workbench.action.terminal.splitInActiveWorkspace"
   },
-  // Toggle terminal fullscreen.
   {
     "key": "alt+f",
     "command": "workbench.action.toggleMaximizedPanel"
   },
-  // Wrap the current selected elements with html tags.
+  /* --------------------------------- Editor --------------------------------- */
   {
     "key": "alt+w",
     "command": "editor.emmet.action.wrapWithAbbreviation",
-    "when": "editorHasSelection"
+    "when": "editorHasSelection && editorLangId == 'html'"
   },
-  // (Mac) Allow duplicate line up on Linux.
   {
-    "key": "shift+alt+up",
+    "key": "alt+w",
+    "command": "editor.action.surroundWithSnippet",
+    "when": "editorHasSelection && editorLangId != 'html'"
+  },
+  {
+    "key": "alt+shift+right",
+    "command": "editor.action.smartSelect.expand",
+    "when": "!isMac && editorTextFocus && editorLangId != 'html'"
+  },
+  {
+    "key": "alt+shift+left",
+    "command": "editor.action.smartSelect.shrink",
+    "when": "!isMac && editorTextFocus && editorLangId != 'html'"
+  },
+  {
+    "key": "alt+shift+right",
+    "command": "editor.emmet.action.balanceOut",
+    "when": "!isMac && editorTextFocus && editorLangId == 'html'"
+  },
+  {
+    "key": "alt+shift+left",
+    "command": "editor.emmet.action.balanceIn",
+    "when": "!isMac && editorTextFocus && editorLangId == 'html'"
+  },
+  {
+    "key": "alt+shift+up",
     "command": "editor.action.copyLinesUpAction",
-    "when": "editorTextFocus && !editorReadOnly && isLinux"
+    "when": "!isMac && editorTextFocus"
   },
-  // (Mac) Allow duplicate line down on Linux.
   {
-    "key": "shift+alt+down",
+    "key": "alt+shift+down",
     "command": "editor.action.copyLinesDownAction",
-    "when": "editorTextFocus && !editorReadOnly && isLinux"
+    "when": "!isMac && editorTextFocus"
   },
-  // (Mac) Allow save all file like Mac on Linux and Windows.
   {
-    "key": "ctrl+shift+s",
-    "command": "workbench.action.files.saveAll",
-    "when": "isLinux || isWindows"
+    "key": "alt+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "!isMac && editorTextFocus"
   },
-  // (Extension) Insert console.log('selectedElement: ' + selectedElement).
+  {
+    "key": "cmd+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "alt+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "!isMac && editorTextFocus"
+  },
+  {
+    "key": "cmd+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "alt+shift+r",
+    "command": "editor.action.rename",
+    "when": "!isMac && editorTextFocus"
+  },
+  {
+    "key": "cmd+shift+r",
+    "command": "editor.action.rename",
+    "when": "isMac && editorTextFocus"
+  },
+  /* ------------------------------- Extensions ------------------------------- */
+  // https://marketplace.visualstudio.com/items?itemName=vit-m.template-strings
+  {
+    "key": "alt+[BracketRight]",
+    "command": "template-strings.insertArg",
+    "when": "editorTextFocus"
+  },
+  // https://marketplace.visualstudio.com/items?itemName=whtouche.vscode-js-console-utils
   {
     "key": "cmd+shift+l",
     "command": "extension.insertLogStatement",
     "when": "editorTextFocus && !editorReadOnly"
   },
-  // (Extension) Jump between  Angular component files, switch back and forth to associated template.
+  // https://marketplace.visualstudio.com/items?itemName=john-crowson.angular-file-changer
   {
     "key": "alt+q",
-    "command": "extension.ngQuickSwitchToggle"
+    "command": "extension.switchTypeScript",
+    "when": "editorLangId == 'html'"
+  },
+  {
+    "key": "alt+q",
+    "command": "extension.switchHTML",
+    "when": "editorLangId == 'typescript' || editorLangId == 'scss' || editorLangId == 'css' || editorLangId == 'less"
   }
 ]

@@ -21,7 +21,7 @@ POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Prompt segments
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     os_icon custom_host user dir dir_writable vcs
-    custom_javascript
+    custom_javascript custom_python custom_go
     newline status
 )
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
@@ -85,15 +85,33 @@ zsh_javascript() {
         # too slow # NPM_VERSION=$(npm -v 2>/dev/null)
         # too slow # [[ $NPM_VERSION != null ]] && echo -n "%{%F{210}%}\ue616 $NPM_VERSION "
         ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $ANGULAR_VERSION ]] && echo -n " %{%F{203}%}\ue753 $ANGULAR_VERSION" && exit
+        [[ -n $ANGULAR_VERSION ]] && echo -n " %{%F{$COLOR_RED}%}\ue753 $ANGULAR_VERSION" && exit
         REACT_VERSION=$(cat package.json | grep -o '"react": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $REACT_VERSION ]] && echo -n " %{%F{045}%}\ue7ba $REACT_VERSION" && exit
+        [[ -n $REACT_VERSION ]] && echo -n " %{%F{$COLOR_BLUE}%}\ue7ba $REACT_VERSION" && exit
         VUE_VERSION=$(cat package.json | grep -o '"vue": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $VUE_VERSION ]] && echo -n " %{%F{042}%}\ufd42 $VUE_VERSION" && exit
+        [[ -n $VUE_VERSION ]] && echo -n " %{%F{$COLOR_GREEN}%}\ufd42 $VUE_VERSION" && exit
     fi
 }
 POWERLEVEL9K_CUSTOM_JAVASCRIPT="zsh_javascript"
 POWERLEVEL9K_CUSTOM_JAVASCRIPT_BACKGROUND=$COLOR_BLACK
+# Custom Python
+zsh_python() {
+    if [[ -n $(find requirements.txt 2>/dev/null || find setup.py 2>/dev/null) && -x $(command -v python) ]]; then
+        PYTHON_VERSION=$(python --version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]' 2>/dev/null)
+        [[ -n $PYTHON_VERSION ]] && echo -n "%{%F{$COLOR_YELLOW}%}\uf81f $PYTHON_VERSION" && exit
+    fi
+}
+POWERLEVEL9K_CUSTOM_PYTHON="zsh_python"
+POWERLEVEL9K_CUSTOM_PYTHON_BACKGROUND=$COLOR_BLACK
+# Custom Go
+zsh_go() {
+    if [[ -n $(find go.mod 2>/dev/null) && -x $(command -v go) ]]; then
+        GO_VERSION=$(go version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]' 2>/dev/null)
+        [[ -n $GO_VERSION ]] && echo -n "%{%F{$COLOR_CYAN}%}\ue627 $GO_VERSION" && exit
+    fi
+}
+POWERLEVEL9K_CUSTOM_GO="zsh_go"
+POWERLEVEL9K_CUSTOM_GO_BACKGROUND=$COLOR_BLACK
 # Oh-My-Zsh ------------------------------------------------------------------ #
 export ZSH="$HOME/.oh-my-zsh"
 plugins+=(zsh-autosuggestions zsh-syntax-highlighting k)
@@ -129,8 +147,8 @@ alias x="exit"
 alias c="clear"
 alias l="ls -F"
 alias la="ls -AF"
-alias ll="k -h 2>/dev/null || ls -lhF"
-alias lla="k -hA 2>/dev/null || ls -lhAF"
+alias ll="k -h || ls -lhF"
+alias lla="k -ha || ls -lhAF"
 cdp() { cd $YOUR_PROJECT_FOLDER"/$1" && lla }
 mkcd() { mkdir -p "$1" && cd "$1" }
 glog() { git log --graph --abbrev-commit --decorate --date=relative --all }

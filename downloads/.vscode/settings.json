@@ -1,18 +1,24 @@
 {
-  /* -------------------------------------------------------------------------- */
-  /*                                    Base                                    */
-  /* -------------------------------------------------------------------------- */
-  // Window & layout
+  /* ----------------------------- Window & layout ---------------------------- */
   "window.nativeTabs": true,
-  "window.menuBarVisibility": "hidden",
+  "window.menuBarVisibility": "toggle",
   "window.confirmBeforeClose": "keyboardOnly",
+  "window.titleBarStyle": "native",
+  "workbench.editor.highlightModifiedTabs": true,
   "explorer.sortOrder": "type",
   "explorer.compactFolders": false,
-  "editor.minimap.enabled": true,
-  "editor.minimap.side": "left",
+  "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": false,
   "explorer.openEditors.visible": 0,
-  // Editor config
+  "explorer.autoReveal": false,
+  "workbench.tree.indent": 14,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.editor.enablePreview": false,
+  /* --------------------------------- Editor --------------------------------- */
+  "editor.experimental.stickyScroll.enabled": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.renderWhitespace": "trailing",
   "editor.cursorSmoothCaretAnimation": true,
   "editor.bracketPairColorization.enabled": false,
   "editor.linkedEditing": true,
@@ -26,35 +32,33 @@
     "source.addMissingImports": true,
     "source.organizeImports": true
   },
-  // Terminal panel
+  "emmet.triggerExpansionOnTab": true,
+  /* ----------------------------- Terminal panel ----------------------------- */
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.tabs.enabled": false,
   "workbench.panel.defaultLocation": "right",
-  "terminal.integrated.gpuAcceleration": "canvas",
-  // Custom fonts
+  /* ---------------------------------- Fonts --------------------------------- */
   "editor.lineHeight": 19,
   "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
   "debug.console.fontFamily": "Iosevka Nerd Font, Noto Color Emoji",
   "terminal.integrated.fontSize": 13,
   "editor.fontLigatures": true,
   "editor.fontSize": 15,
-  // Telemetry & updates
+  /* --------------------------- Telemetry & updates -------------------------- */
   "telemetry.telemetryLevel": "off",
   "update.mode": "manual",
   "extensions.autoUpdate": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.enableExperiments": false,
   "extensions.autoCheckUpdates": false,
-  /* -------------------------------------------------------------------------- */
-  /*                                 Extensions                                 */
-  /* -------------------------------------------------------------------------- */
-  // Prettier
+  /* ------------------------------- Extensions ------------------------------- */
+  // https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // Code spell checker
+  // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
   "cSpell.language": "en,fr",
   "cSpell.diagnosticLevel": "Hint",
   "cSpell.userWords": ["aujourd'hui", "navbar", "scrollbar", "sidenav"],
-  // Material icon theme
+  // https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.hidesExplorerArrows": true,
   "material-icon-theme.showWelcomeMessage": false,
@@ -66,14 +70,13 @@
     "*.gateway.ts": "nest-gateway",
     "*.decorator.ts": "nest-decorator"
   },
-  // Google translate
+  // https://marketplace.visualstudio.com/items?itemName=hancel.google-translate
   "google-translate.firstLanguage": "en",
   "google-translate.secondLanguage": "fr",
-  // Footsteps
-  "footsteps.highlightColorMaxOpacity": 0.2,
-  "footsteps.highlightColor": "rgb(0, 0, 0)",
-  /* -------------------------------------------------------------------------- */
-  /*                                New settings                                */
-  /* -------------------------------------------------------------------------- */
+  // https://marketplace.visualstudio.com/items?itemName=sndst00m.vscode-native-svg-preview
+  "workbench.editorAssociations": {
+    "*.svg": "svgPreview.previewEditor"
+  },
+  /* ------------------------------ New settings ------------------------------ */
   "": ""
 }
