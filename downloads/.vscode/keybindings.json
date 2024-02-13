@@ -1,15 +1,42 @@
 [
-  /* ----------------------------- Window & layout ---------------------------- */
-  {
-    "key": "cmd+q",
-    "command": "isMac"
-  },
+  // Save all files like mac
   {
     "key": "ctrl+alt+s",
     "command": "workbench.action.files.saveAll",
     "when": "!isMac"
   },
-  /* ----------------------------- Terminal panel ----------------------------- */
+  // Tabs controls like web browsers
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor",
+    "when": "!activeEditorGroupEmpty"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor",
+    "when": "!activeEditorGroupEmpty"
+  },
+  // Open and focus toggle for explorer view
+  {
+    "key": "cmd+shift+e",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        { "command": "workbench.action.focusSideBar" },
+        { "command": "workbench.view.explorer" }
+      ]
+    },
+    "when": "!sideBarVisible"
+  },
+  {
+    "key": "cmd+shift+e",
+    "command": "runCommands",
+    "args": {
+      "commands": [{ "command": "workbench.action.closeSidebar" }]
+    },
+    "when": "sideBarVisible"
+  },
+  // Quick controls on terminal
   {
     "key": "alt+x",
     "command": "workbench.action.togglePanel"
@@ -22,17 +49,24 @@
     "key": "alt+f",
     "command": "workbench.action.toggleMaximizedPanel"
   },
-  /* --------------------------------- Editor --------------------------------- */
+  // Quick controls for editor groups
+  {
+    "key": "cmd+2",
+    "command": "workbench.action.splitEditor",
+    "when": "!multipleEditorGroups"
+  },
+  // Smart wraps
   {
     "key": "alt+w",
     "command": "editor.emmet.action.wrapWithAbbreviation",
-    "when": "editorHasSelection && editorLangId == 'html'"
+    "when": "editorHasSelection"
   },
   {
-    "key": "alt+w",
+    "key": "alt+shift+w",
     "command": "editor.action.surroundWithSnippet",
-    "when": "editorHasSelection && editorLangId != 'html'"
+    "when": "editorHasSelection"
   },
+  // Smart select like mac
   {
     "key": "alt+shift+right",
     "command": "editor.action.smartSelect.expand",
@@ -53,6 +87,7 @@
     "command": "editor.emmet.action.balanceIn",
     "when": "!isMac && editorTextFocus && editorLangId == 'html'"
   },
+  // Quick line copy like mac
   {
     "key": "alt+shift+up",
     "command": "editor.action.copyLinesUpAction",
@@ -63,6 +98,18 @@
     "command": "editor.action.copyLinesDownAction",
     "when": "!isMac && editorTextFocus"
   },
+  // Quick rename, replace F12
+  {
+    "key": "alt+shift+r",
+    "command": "editor.action.rename",
+    "when": "!isMac && editorTextFocus"
+  },
+  {
+    "key": "cmd+shift+r",
+    "command": "editor.action.rename",
+    "when": "isMac && editorTextFocus"
+  },
+  // Select highlights
   {
     "key": "alt+d",
     "command": "editor.action.addSelectionToNextFindMatch",
@@ -83,16 +130,6 @@
     "command": "editor.action.selectHighlights",
     "when": "isMac && editorTextFocus"
   },
-  {
-    "key": "alt+shift+r",
-    "command": "editor.action.rename",
-    "when": "!isMac && editorTextFocus"
-  },
-  {
-    "key": "cmd+shift+r",
-    "command": "editor.action.rename",
-    "when": "isMac && editorTextFocus"
-  },
   /* ------------------------------- Extensions ------------------------------- */
   // https://marketplace.visualstudio.com/items?itemName=vit-m.template-strings
   {
@@ -100,21 +137,15 @@
     "command": "template-strings.insertArg",
     "when": "editorTextFocus"
   },
-  // https://marketplace.visualstudio.com/items?itemName=whtouche.vscode-js-console-utils
-  {
-    "key": "cmd+shift+l",
-    "command": "extension.insertLogStatement",
-    "when": "editorTextFocus && !editorReadOnly"
-  },
   // https://marketplace.visualstudio.com/items?itemName=john-crowson.angular-file-changer
   {
     "key": "alt+q",
     "command": "extension.switchTypeScript",
-    "when": "editorLangId == 'html'"
+    "when": "resourceExtname == '.html'"
   },
   {
     "key": "alt+q",
     "command": "extension.switchHTML",
-    "when": "editorLangId == 'typescript' || editorLangId == 'scss' || editorLangId == 'css' || editorLangId == 'less"
+    "when": "resourceExtname != '.html'"
   }
 ]

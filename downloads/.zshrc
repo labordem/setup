@@ -20,8 +20,8 @@ fi
 POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Prompt segments
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon custom_host user dir dir_writable vcs
-    custom_javascript custom_python custom_go
+    os_icon context custom_host dir dir_writable vcs
+    custom_node_global custom_go_global custom_python_global
     newline status
 )
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
@@ -32,16 +32,16 @@ POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
 # OS icon
 POWERLEVEL9K_OS_ICON_FOREGROUND=$COLOR_WHITE
 POWERLEVEL9K_OS_ICON_BACKGROUND=$COLOR_BLACK
-# User
-POWERLEVEL9K_USER_ICON=$'\uF007' # 
-POWERLEVEL9K_ROOT_ICON=$'\uF6A4' # 
-POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
-POWERLEVEL9K_USER_DEFAULT_FOREGROUND=$COLOR_BLACK
-POWERLEVEL9K_USER_DEFAULT_BACKGROUND=$COLOR_BLUE
-POWERLEVEL9K_USER_ROOT_FOREGROUND=$COLOR_BLACK
-POWERLEVEL9K_USER_ROOT_BACKGROUND=$COLOR_MAGENTA
-POWERLEVEL9K_USER_SUDO_FOREGROUND=$COLOR_BLACK
-POWERLEVEL9K_USER_SUDO_BACKGROUND=$COLOR_MAGENTA
+# Context
+POWERLEVEL9K_CONTEXT_DEFAULT_TEMPLATE="\uF007 $USER" # 
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND=$COLOR_BLACK
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND=$COLOR_BLUE
+POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE=$'\uF6A4 ' # 
+POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=$COLOR_BLACK
+POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=$COLOR_MAGENTA
+POWERLEVEL9K_CONTEXT_SUDO_TEMPLATE=$'\uF09C ' # 
+POWERLEVEL9K_CONTEXT_SUDO_FOREGROUND=$COLOR_BLACK
+POWERLEVEL9K_CONTEXT_SUDO_BACKGROUND=$COLOR_MAGENTA
 # Custom Host
 zsh_host() {
     [[ $HOST == 'toolbox' || $HOST == 'dev' ]] && echo -n "\uf6a5 $HOST"
@@ -77,41 +77,50 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=$COLOR_BLACK
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=$COLOR_MAGENTA
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=$COLOR_BLACK
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=$COLOR_YELLOW
-# Custom Javascript
-zsh_javascript() {
+# Custom Node.js local versions
+zsh_node_local() {
+    if [[ -n $(find package.json 2>/dev/null) ]]; then
+        NODE_VERSION=$(cat .nvmrc 2>/dev/null)
+        [[ -n $NODE_VERSION ]] && echo -n "%{%F{$COLOR_GREEN}%}\ue617 $NODE_VERSION"
+        ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
+        [[ -n $ANGULAR_VERSION ]] && echo -n " %{%F{203}%}\ue753 $ANGULAR_VERSION" && exit
+        REACT_VERSION=$(cat package.json | grep -o '"react": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
+        [[ -n $REACT_VERSION ]] && echo -n " %{%F{045}%}\ue7ba $REACT_VERSION" && exit
+        VUE_VERSION=$(cat package.json | grep -o '"vue": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
+        [[ -n $VUE_VERSION ]] && echo -n " %{%F{042}%}\ufd42 $VUE_VERSION" && exit
+    fi
+}
+POWERLEVEL9K_CUSTOM_NODE_LOCAL="zsh_node_local"
+POWERLEVEL9K_CUSTOM_NODE_LOCAL_BACKGROUND=$COLOR_BLACK
+# Custom Node.js global versions
+zsh_node_global() {
     if [[ -n $(find package.json 2>/dev/null) && -x $(command -v node) ]]; then
         NODE_VERSION=$(node -v | sed 's/[^0-9.]*//g' 2>/dev/null)
         [[ -n $NODE_VERSION ]] && echo -n "%{%F{$COLOR_GREEN}%}\ue617 $NODE_VERSION"
-        # too slow # NPM_VERSION=$(npm -v 2>/dev/null)
-        # too slow # [[ $NPM_VERSION != null ]] && echo -n "%{%F{210}%}\ue616 $NPM_VERSION "
-        ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $ANGULAR_VERSION ]] && echo -n " %{%F{$COLOR_RED}%}\ue753 $ANGULAR_VERSION" && exit
-        REACT_VERSION=$(cat package.json | grep -o '"react": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $REACT_VERSION ]] && echo -n " %{%F{$COLOR_BLUE}%}\ue7ba $REACT_VERSION" && exit
-        VUE_VERSION=$(cat package.json | grep -o '"vue": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $VUE_VERSION ]] && echo -n " %{%F{$COLOR_GREEN}%}\ufd42 $VUE_VERSION" && exit
+        LOCAL_ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
+        [[ -n $LOCAL_ANGULAR_VERSION ]] && ANGULAR_VERSION=$(npm info -g @angular/cli version) && [[ -n $ANGULAR_VERSION ]] && echo -n "   %{%F{203}%}\ue753 $ANGULAR_VERSION" && exit
     fi
 }
-POWERLEVEL9K_CUSTOM_JAVASCRIPT="zsh_javascript"
-POWERLEVEL9K_CUSTOM_JAVASCRIPT_BACKGROUND=$COLOR_BLACK
-# Custom Python
-zsh_python() {
+POWERLEVEL9K_CUSTOM_NODE_GLOBAL="zsh_node_global"
+POWERLEVEL9K_CUSTOM_NODE_GLOBAL_BACKGROUND=$COLOR_BLACK
+# Custom Python global versions
+zsh_python_global() {
     if [[ -n $(find requirements.txt 2>/dev/null || find setup.py 2>/dev/null) && -x $(command -v python) ]]; then
         PYTHON_VERSION=$(python --version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]' 2>/dev/null)
         [[ -n $PYTHON_VERSION ]] && echo -n "%{%F{$COLOR_YELLOW}%}\uf81f $PYTHON_VERSION" && exit
     fi
 }
-POWERLEVEL9K_CUSTOM_PYTHON="zsh_python"
-POWERLEVEL9K_CUSTOM_PYTHON_BACKGROUND=$COLOR_BLACK
-# Custom Go
-zsh_go() {
+POWERLEVEL9K_CUSTOM_PYTHON_GLOBAL="zsh_python_global"
+POWERLEVEL9K_CUSTOM_PYTHON_GLOBAL_BACKGROUND=$COLOR_BLACK
+# Custom Go global versions
+zsh_go_global() {
     if [[ -n $(find go.mod 2>/dev/null) && -x $(command -v go) ]]; then
         GO_VERSION=$(go version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]' 2>/dev/null)
         [[ -n $GO_VERSION ]] && echo -n "%{%F{$COLOR_CYAN}%}\ue627 $GO_VERSION" && exit
     fi
 }
-POWERLEVEL9K_CUSTOM_GO="zsh_go"
-POWERLEVEL9K_CUSTOM_GO_BACKGROUND=$COLOR_BLACK
+POWERLEVEL9K_CUSTOM_GO_GLOBAL="zsh_go_global"
+POWERLEVEL9K_CUSTOM_GO_GLOBAL_BACKGROUND=$COLOR_BLACK
 # Oh-My-Zsh ------------------------------------------------------------------ #
 export ZSH="$HOME/.oh-my-zsh"
 plugins+=(zsh-autosuggestions zsh-syntax-highlighting k)
@@ -147,8 +156,8 @@ alias x="exit"
 alias c="clear"
 alias l="ls -F"
 alias la="ls -AF"
-alias ll="k -h || ls -lhF"
-alias lla="k -ha || ls -lhAF"
+alias ll="k -h 2>/dev/null || ls -lhF"
+alias lla="k -hA 2>/dev/null || ls -lhAF"
 cdp() { cd $YOUR_PROJECT_FOLDER"/$1" && lla }
 mkcd() { mkdir -p "$1" && cd "$1" }
 glog() { git log --graph --abbrev-commit --decorate --date=relative --all }
