@@ -1,52 +1,27 @@
 [
-  // Save all files like mac
   {
-    "key": "ctrl+alt+s",
-    "command": "workbench.action.files.saveAll",
-    "when": "!isMac"
+    "key": "cmd+shift+v",
+    "command": "workbench.scm.focus"
   },
-  // Tabs controls like web browsers
+  // Create file and folder
   {
-    "key": "ctrl+tab",
-    "command": "workbench.action.nextEditor",
-    "when": "!activeEditorGroupEmpty"
+    "key": "cmd+n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus"
   },
+  // Quick peek
   {
-    "key": "ctrl+shift+tab",
-    "command": "workbench.action.previousEditor",
-    "when": "!activeEditorGroupEmpty"
-  },
-  // Open and focus toggle for explorer view
-  {
-    "key": "cmd+shift+e",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        { "command": "workbench.action.focusSideBar" },
-        { "command": "workbench.view.explorer" }
-      ]
-    },
-    "when": "!sideBarVisible"
-  },
-  {
-    "key": "cmd+shift+e",
-    "command": "runCommands",
-    "args": {
-      "commands": [{ "command": "workbench.action.closeSidebar" }]
-    },
-    "when": "sideBarVisible"
+    "key": "alt+p",
+    "command": "editor.action.peekImplementation",
+    "when": "editorTextFocus && !referenceSearchVisible"
   },
   // Quick controls on terminal
-  {
-    "key": "alt+x",
-    "command": "workbench.action.togglePanel"
-  },
   {
     "key": "alt+j",
     "command": "workbench.action.terminal.splitInActiveWorkspace"
   },
   {
-    "key": "alt+f",
+    "key": "cmd+shift+j",
     "command": "workbench.action.toggleMaximizedPanel"
   },
   // Quick controls for editor groups
@@ -66,65 +41,13 @@
     "command": "editor.action.surroundWithSnippet",
     "when": "editorHasSelection"
   },
-  // Smart select like mac
-  {
-    "key": "alt+shift+right",
-    "command": "editor.action.smartSelect.expand",
-    "when": "!isMac && editorTextFocus && editorLangId != 'html'"
-  },
-  {
-    "key": "alt+shift+left",
-    "command": "editor.action.smartSelect.shrink",
-    "when": "!isMac && editorTextFocus && editorLangId != 'html'"
-  },
-  {
-    "key": "alt+shift+right",
-    "command": "editor.emmet.action.balanceOut",
-    "when": "!isMac && editorTextFocus && editorLangId == 'html'"
-  },
-  {
-    "key": "alt+shift+left",
-    "command": "editor.emmet.action.balanceIn",
-    "when": "!isMac && editorTextFocus && editorLangId == 'html'"
-  },
-  // Quick line copy like mac
-  {
-    "key": "alt+shift+up",
-    "command": "editor.action.copyLinesUpAction",
-    "when": "!isMac && editorTextFocus"
-  },
-  {
-    "key": "alt+shift+down",
-    "command": "editor.action.copyLinesDownAction",
-    "when": "!isMac && editorTextFocus"
-  },
-  // Quick rename, replace F12
+  // Quick rename, replace F2
   {
     "key": "alt+shift+r",
     "command": "editor.action.rename",
-    "when": "!isMac && editorTextFocus"
-  },
-  {
-    "key": "cmd+shift+r",
-    "command": "editor.action.rename",
-    "when": "isMac && editorTextFocus"
+    "when": "editorTextFocus"
   },
   // Select highlights
-  {
-    "key": "alt+d",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "!isMac && editorTextFocus"
-  },
-  {
-    "key": "cmd+d",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "isMac && editorTextFocus"
-  },
-  {
-    "key": "alt+shift+d",
-    "command": "editor.action.selectHighlights",
-    "when": "!isMac && editorTextFocus"
-  },
   {
     "key": "cmd+shift+d",
     "command": "editor.action.selectHighlights",
@@ -135,7 +58,7 @@
   {
     "key": "alt+[BracketRight]",
     "command": "template-strings.insertArg",
-    "when": "editorTextFocus"
+    "when": "isMac && editorTextFocus"
   },
   // https://marketplace.visualstudio.com/items?itemName=john-crowson.angular-file-changer
   {
@@ -147,5 +70,16 @@
     "key": "alt+q",
     "command": "extension.switchHTML",
     "when": "resourceExtname != '.html'"
+  },
+  // https://marketplace.visualstudio.com/items?itemName=dotcypress.console-log
+  {
+    "key": "ctrl+shift+q",
+    "command": "-extension.generateConsoleLog",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "extension.generateConsoleLog",
+    "when": "editorTextFocus"
   }
 ]

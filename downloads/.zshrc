@@ -20,7 +20,8 @@ fi
 POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Prompt segments
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon context custom_host dir dir_writable vcs
+    os_icon custom_host dir dir_writable
+    vcs
     custom_node_global custom_go_global custom_python_global
     newline status
 )
@@ -81,13 +82,15 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=$COLOR_YELLOW
 zsh_node_local() {
     if [[ -n $(find package.json 2>/dev/null) ]]; then
         NODE_VERSION=$(cat .nvmrc 2>/dev/null)
-        [[ -n $NODE_VERSION ]] && echo -n "%{%F{$COLOR_GREEN}%}\ue617 $NODE_VERSION"
+        [[ -n $NODE_VERSION ]] && echo -n "%{%F{$COLOR_GREEN}%}\ue617 $NODE_VERSION "
+        HONO_VERSION=$(cat package.json | grep -o '"hono": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
+        [[ -n $HONO_VERSION ]] && echo -n "%{%F{215}%}\uf490 $HONO_VERSION "
         ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $ANGULAR_VERSION ]] && echo -n " %{%F{203}%}\ue753 $ANGULAR_VERSION" && exit
+        [[ -n $ANGULAR_VERSION ]] && echo -n "%{%F{197}%}\ue753 $ANGULAR_VERSION" && exit
         REACT_VERSION=$(cat package.json | grep -o '"react": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $REACT_VERSION ]] && echo -n " %{%F{045}%}\ue7ba $REACT_VERSION" && exit
+        [[ -n $REACT_VERSION ]] && echo -n "%{%F{045}%}\ue7ba $REACT_VERSION" && exit
         VUE_VERSION=$(cat package.json | grep -o '"vue": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $VUE_VERSION ]] && echo -n " %{%F{042}%}\ufd42 $VUE_VERSION" && exit
+        [[ -n $VUE_VERSION ]] && echo -n "%{%F{042}%}\ufd42 $VUE_VERSION" && exit
     fi
 }
 POWERLEVEL9K_CUSTOM_NODE_LOCAL="zsh_node_local"
@@ -98,7 +101,7 @@ zsh_node_global() {
         NODE_VERSION=$(node -v | sed 's/[^0-9.]*//g' 2>/dev/null)
         [[ -n $NODE_VERSION ]] && echo -n "%{%F{$COLOR_GREEN}%}\ue617 $NODE_VERSION"
         LOCAL_ANGULAR_VERSION=$(cat package.json | grep -o '"@angular/core": "[^"]*' | grep -o '[^"]*$' | sed 's/[^0-9.]//g' 2>/dev/null)
-        [[ -n $LOCAL_ANGULAR_VERSION ]] && ANGULAR_VERSION=$(npm info -g @angular/cli version) && [[ -n $ANGULAR_VERSION ]] && echo -n "   %{%F{203}%}\ue753 $ANGULAR_VERSION" && exit
+        [[ -n $LOCAL_ANGULAR_VERSION ]] && ANGULAR_VERSION=$(npm info -g @angular/cli version) && [[ -n $ANGULAR_VERSION ]] && echo -n "  %{%F{197}%}\ue753 $ANGULAR_VERSION" && exit
     fi
 }
 POWERLEVEL9K_CUSTOM_NODE_GLOBAL="zsh_node_global"
@@ -158,7 +161,9 @@ alias l="ls -F"
 alias la="ls -AF"
 alias ll="k -h 2>/dev/null || ls -lhF"
 alias lla="k -hA 2>/dev/null || ls -lhAF"
-cdp() { cd $YOUR_PROJECT_FOLDER"/$1" && lla }
+alias dev="node --run dev"
+alias rmempty="find . -empty -type d -delete"
+cdp() { cd $YOUR_PROJECT_FOLDER"/$1" }
 mkcd() { mkdir -p "$1" && cd "$1" }
 glog() { git log --graph --abbrev-commit --decorate --date=relative --all }
 glg() { git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' }
