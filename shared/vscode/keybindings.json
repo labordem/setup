@@ -1,0 +1,42 @@
+[
+  // Create file or/and directory
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus"
+  },
+  // Quick controls on terminal
+  {
+    "key": "cmd+shift+j",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  // Quick controls for editor groups
+  {
+    "key": "cmd+2",
+    "command": "workbench.action.splitEditor",
+    "when": "!multipleEditorGroups"
+  },
+  // Smart wraps
+  {
+    "key": "alt+w",
+    "command": "editor.emmet.action.wrapWithAbbreviation",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "alt+shift+w",
+    "command": "editor.action.surroundWithSnippet",
+    "when": "editorHasSelection"
+  },
+  // Quick rename, replace F2
+  {
+    "key": "alt+shift+r",
+    "command": "editor.action.rename",
+    "when": "editorTextFocus"
+  },
+  // Select highlights
+  {
+    "key": "cmd+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "isMac && editorTextFocus"
+  }
+]

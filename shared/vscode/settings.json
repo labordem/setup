@@ -1,0 +1,193 @@
+{
+  "$schema": "vscode://schemas/settings/user",
+  // Window --------------------------------------------------------------------
+  "window.commandCenter": false,
+  "window.confirmBeforeClose": "keyboardOnly",
+  "window.restoreWindows": "none",
+  "window.customTitleBarVisibility": "windowed",
+  // Worbench ------------------------------------------------------------------
+  "workbench.startupEditor": "none",
+  "workbench.activityBar.location": "top",
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.statusBar.visible": false,
+  "workbench.editor.enablePreviewFromQuickOpen": true,
+  // Fonts ---------------------------------------------------------------------
+  "editor.lineHeight": 22,
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.fontFamily": "Iosevka Nerd Font, Noto Color Emoji, monospace",
+  // Terminal ------------------------------------------------------------------
+  "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "zsh",
+      "args": ["-i"]
+    }
+  },
+  "terminal.integrated.fontWeight": 500,
+  "terminal.integrated.fontSize": 14,
+  // Sidebar -------------------------------------------------------------------
+  "explorer.sortOrder": "type",
+  "explorer.compactFolders": false,
+  "explorer.fileNesting.enabled": false,
+  "explorer.openEditors.visible": 6,
+  "explorer.openEditors.minVisible": 6,
+  "git.openDiffOnClick": false,
+  // Editor --------------------------------------------------------------------
+  "editor.stickyScroll.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.bracketPairColorization.enabled": false,
+  "editor.linkedEditing": true,
+  "editor.stickyTabStops": true,
+  // Formatting ----------------------------------------------------------------
+  "editor.rulers": [80],
+  "editor.insertSpaces": true,
+  "editor.indentSize": 4,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Markdown support ----------------------------------------------------------
+  "markdown.validate.enabled": true,
+  "markdown.updateLinksOnFileMove.enabled": "prompt",
+  // Debug ---------------------------------------------------------------------
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "debug.toolBarLocation": "docked",
+  // Telemetry & updates -------------------------------------------------------
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "manual",
+  "extensions.autoUpdate": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "extensions.autoCheckUpdates": false,
+  "workbench.enableExperiments": false,
+  // Extensions ----------------------------------------------------------------
+  "extensions.allowed": {
+    "a-h.templ": true,
+    "adpyke.vscode-sql-formatter": true,
+    "alexdauenhauer.catppuccin-noctis-icons": true,
+    "amih90.to": true,
+    "angular.ng-template": true,
+    "bradlc.vscode-tailwindcss": true,
+    "cardinal90.multi-cursor-case-preserve": true,
+    "catppuccin.catppuccin-vsc": true,
+    "codeium.codeium": true,
+    "dbaeumer.vscode-eslint": true,
+    "dkultasev.vs-code-snippet-generator": true,
+    "editorconfig.editorconfig": true,
+    "esbenp.prettier-vscode": true,
+    "github.vscode-github-actions": true,
+    "github.vscode-pull-request-github": true,
+    "golang.go": true,
+    "guilhermetheodoro.typescript-indexing": true,
+    "hancel.google-translate": true,
+    "ionutvmi.path-autocomplete": true,
+    "kisstkondoros.vscode-gutter-preview": true,
+    "lsl.vscode-templ-go-to-definition": true,
+    "mhutchie.git-graph": true,
+    "ms-vscode-remote.remote-ssh": true,
+    "ms-vscode-remote.remote-ssh-edit": true,
+    "ms-vscode.live-server": true,
+    "ms-vscode.remote-explorer": true,
+    "ms-vscode.remote-repositories": true,
+    "oliversturm.fix-json": true,
+    "pflannery.vscode-versionlens": true,
+    "piotrpalarz.vscode-gitignore-generator": true,
+    "pomdtr.excalidraw-editor": true,
+    "pushqrdx.inline-html": true,
+    "shd101wyy.markdown-preview-enhanced": true,
+    "sndst00m.vscode-native-svg-preview": true,
+    "stackbreak.comment-divider": true,
+    "streetsidesoftware.code-spell-checker": true,
+    "streetsidesoftware.code-spell-checker-french": true,
+    "tamasfe.even-better-toml": true,
+    "ue.alphabetical-sorter": true,
+    "usernamehw.errorlens": true,
+    "vit-m.template-strings": true,
+    "yoavbls.pretty-ts-errors": true
+  },
+  // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+  "cSpell.language": "en,fr",
+  "cSpell.diagnosticLevel": "Hint",
+  "cSpell.userWords": ["aujourd'hui", "htmx", "navbar", "scrollbar", "sidenav"],
+  // https://marketplace.visualstudio.com/items?itemName=hancel.google-translate
+  "google-translate.firstLanguage": "en",
+  "google-translate.secondLanguage": "fr",
+  // https://marketplace.visualstudio.com/items?itemName=sndst00m.vscode-native-svg-preview
+  "workbench.editorAssociations": {
+    "*.excalidraw.svg": "editor.excalidraw",
+    "*.svg": "svgPreview.previewEditor"
+  },
+  // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+  "errorLens.delay": 10,
+  // https://marketplace.visualstudio.com/items?itemName=stackbreak.comment-divider
+  "comment-divider.mainHeaderAlign": "left",
+  "comment-divider.mainHeaderFiller": "=",
+  "comment-divider.subheaderAlign": "left",
+  // Theme ---------------------------------------------------------------------
+  // https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "catppuccin.extraBordersEnabled": true,
+  "catppuccin.accentColor": "lavender",
+  "catppuccin.colorOverrides": {
+    "mocha": {
+      "base": "#1f1e25",
+      "mantle": "#1f1e25",
+      "crust": "#1f1e25"
+    }
+  },
+  "catppuccin.customUIColors": {
+    "all": {
+      "scrollbarSlider.activeBackground": "accent",
+      "editorLineNumber.foreground": "surface1",
+      "editorLineNumber.activeForeground": "accent",
+      "panel.border": "surface0",
+      "terminal.ansiBlack": "surface0",
+      "widget.border": "accent",
+      "editorIndentGuide.background": "surface0",
+      "tree.indentGuidesStroke": "accent",
+      "tree.inactiveIndentGuidesStroke": "surface0",
+      "list.activeSelectionForeground": "accent",
+      "list.inactiveSelectionForeground": "accent",
+      "scrollbar.shadow": "surface0",
+      "editorRuler.foreground": "surface0"
+    }
+  },
+  // https://marketplace.visualstudio.com/items?itemName=alexdauenhauer.catppuccin-noctis-icons
+  "workbench.iconTheme": "catppuccin noctis icons",
+  "catppuccin-noctis-icons.hidesExplorerArrows": true,
+  // Preview -------------------------------------------------------------------
+  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+  "livePreview.previewDebounceDelay": 500,
+  // New -----------------------------------------------------------------------
+  "": ""
+}
