@@ -25,8 +25,13 @@ git config --global user.name labordem
 git config --global user.email 38043788+labordem@users.noreply.github.com
 
 # zsh ------------------------------------------------------------------------ #
+touch ~/.zshrc
 ln -sf ~/Setup/shared/zsh/.zsh_aliases ~/.zsh_aliases
 echo "source ~/.zsh_aliases" >> ~/.zshrc
+brew install zsh-syntax-highlighting
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+brew install zsh-autosuggestions
+echo "source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 
 # nerdfont ------------------------------------------------------------------- #
 brew install --cask font-iosevka-nerd-font
