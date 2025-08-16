@@ -6,6 +6,28 @@
 git clone https://github.com/labordem/setup ~/Setup && cd ~/Setup
 ```
 
+### NixOS
+
+```bash
+# postinstall ---------------------------------------------------------------- #
+# keyboard ------------------------------------------------------------------- #
+# git ------------------------------------------------------------------------ #
+# starship ------------------------------------------------------------------- #
+# languages ------------------------------------------------------------------ #
+sudo nixos-rebuild switch -I nixos-config=nixos/configuration.nix
+
+# zsh ------------------------------------------------------------------------ #
+ln -sf ~/Setup/shared/zsh/.zsh_aliases ~/.zsh_aliases
+
+# vscode --------------------------------------------------------------------- #
+brew cask install visual-studio-code
+mkdir -p ~/.config/Code/User/snippets
+ln -sf ~/Setup/shared/vscode/settings.json ~/.config/Code/User/settings.json
+ln -sf ~/Setup/shared/vscode/global-snippets.code-snippets ~/.config/Code/User/snippets/global-snippets.code-snippets
+ln -sf ~/Setup/shared/vscode/keybindings.json ~/.config/Code/User/keybindings.json
+cat ~/Setup/shared/vscode/settings.json | sed 's/^ *\/\/.*//' | jq -r '.["extensions.allowed"] | keys[]' | xargs -I {} code --install-extension {} --force
+```
+
 ### Darwin (macOS)
 
 Run each section sequentially or execute the entire script to set up a complete development environment.
