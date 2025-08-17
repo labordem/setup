@@ -1,7 +1,10 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
-format = "$os$hostname[](fg:white bg:bright-black)[█](fg:bright-black bg:black)$directory[█](fg:bright-black bg:black)[$git_branch$git_state$git_status](bold bg:black fg:white)[█](fg:black)$nodejs$c$golang$php$python$character"
+format = """
+$os$hostname[](fg:white bg:bright-black)[█](fg:bright-black bg:black)$directory[█](fg:bright-black bg:black)[$git_branch$git_state$git_status](bold bg:black fg:white)[█](fg:black)$nodejs$c$golang$php$python
+$character
+"""
 
 [os]
 disabled = false

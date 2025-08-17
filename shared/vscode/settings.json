@@ -20,6 +20,7 @@
   // Terminal ------------------------------------------------------------------
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.profiles.osx": {
     "zsh": {
       "path": "zsh",

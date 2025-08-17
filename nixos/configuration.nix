@@ -51,17 +51,17 @@ in
         wireless.enable = false;
     };
     time.timeZone = "Europe/Paris";
-    i18n = {
-        defaultLocale = "fr_FR.UTF-8";
-    };
     security = {
         rtkit.enable = true; # Allows Pipewire to use the realtime scheduler for performance.
     };
     environment = {
         systemPackages = with pkgs; [
+            git
+            jq
+            zsh
+            starship
             qwerty-fr
             nixfmt-rfc-style
-            podman-compose
         ];
         gnome = {
             excludePackages = with pkgs; [
@@ -69,6 +69,7 @@ in
                 epiphany
                 totem
                 yelp
+                evolution
             ];
         };
     };
@@ -111,11 +112,8 @@ in
                 extraConfig = ''
                     [ids]
                     *
-
                     [main]
                     leftmeta = layer(meta_mac)
-                    rightmeta = layer(meta_mac)
-
                     [meta_mac:C]
                     c = C-insert
                     v = S-insert
@@ -132,7 +130,6 @@ in
                     left = home
                     right = end
                     tab = swapm(app_switch_state, A-tab)
-
                     [app_switch_state:A]
                 '';
             };
@@ -143,17 +140,6 @@ in
             nerd-fonts.iosevka
         ];
     };
-    users = {
-        defaultUserShell = pkgs.zsh;
-        users.mickael = {
-            isNormalUser = true;
-            description = "Mickaël";
-            extraGroups = [
-                "networkmanager"
-                "wheel"
-            ];
-        };
-    };
     programs = {
         zsh = {
             enable = true;
@@ -162,18 +148,9 @@ in
             enableSyntaxHighlighting = true;
             shellInit = ''
                 eval "$(starship init zsh)"
-                source ~/.zsh_aliases
+                touch ~/.zshrc
+                source ~/Setup/shared/zsh/.zsh_aliases
             '';
-            shellAliases = {
-                x = "exit";
-                c = "clear";
-                l = "ls -F";
-                la = "ls -AF";
-                ll = "ls -lhF";
-                lla = "ls -lhAF";
-                dev = "node --run dev";
-                rmempty = "find . -empty -type d -delete";
-            };
         };
         starship = {
             enable = true;
@@ -229,6 +206,17 @@ in
 
         };
     };
+    users = {
+        defaultUserShell = pkgs.zsh;
+        users.mickael = {
+            isNormalUser = true;
+            description = "Mickaël";
+            extraGroups = [
+                "networkmanager"
+                "wheel"
+            ];
+        };
+    };
     home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -236,6 +224,24 @@ in
             home = {
                 stateVersion = "25.05";
                 username = "mickael";
+                file = {
+                    zsh-aliases = {
+                        source = ../shared/zsh/.zsh_aliases;
+                        target = "~/.zsh_aliases";
+                    };
+                    vscode-settings = {
+                        source = ../shared/vscode/settings.json;
+                        target = "~/.config/Code/User/settings.json";
+                    };
+                    vscode-keybindings = {
+                        source = ../shared/vscode/keybindings.json;
+                        target = "~/.config/Code/User/keybindings.json";
+                    };
+                    vscode-snippets = {
+                        source = ../shared/vscode/global-snippets.code-snippets;
+                        target = "~/.config/Code/User/snippets/global-snippets.code-snippets";
+                    };
+                };
                 homeDirectory = "/home/mickael";
                 packages = with pkgs; [
                     go
@@ -243,6 +249,8 @@ in
                     nodejs
                     google-chrome
                     showtime
+                    gnomeExtensions.blur-my-shell
+                    gnomeExtensions.rounded-window-corners-reborn
                 ];
             };
             programs = {
@@ -257,6 +265,40 @@ in
                 };
                 firefox = {
                     enable = true;
+                    policies = {
+                        DisableTelemetry = true;
+                        DisableFirefoxStudies = true;
+                        EnableTrackingProtection = {
+                            Value= true;
+                            Locked = true;
+                            Cryptomining = true;
+                            Fingerprinting = true;
+                        };
+                        DisablePocket = true;
+                        DisableFirefoxAccounts = true;
+                        DisableAccounts = true;
+                        OverrideFirstRunPage = "";
+                        OverridePostUpdatePage = "";
+                        DontCheckDefaultBrowser = true;
+                        DisplayBookmarksToolbar = "newtab"; # never, always, newtab
+                        DisplayMenuBar = "never"; # always, never, default-on, default-off
+                        SearchBar = "unified";
+                        ExtensionSettings = {
+                            "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
+                            "uBlock0@raymondhill.net" = {
+                                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+                                installation_mode = "force_installed";
+                            };
+                            "idcac-pub@www.idontcareaboutcookies.eu" = {
+                                install_url = "https://addons.mozilla.org/firefox/downloads/latest/i-dont-care-about-cookies/latest.xpi";
+                                installation_mode = "force_installed";
+                            };
+                            "bitwarden@bitwarden.com" = {
+                                install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+                                installation_mode = "force_installed";
+                            };
+                        };
+                    };
                 };
                 vscode = {
                     enable = true;

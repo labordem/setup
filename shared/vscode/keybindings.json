@@ -3,12 +3,21 @@
   {
     "key": "cmd+n",
     "command": "explorer.newFile",
-    "when": "explorerViewletFocus"
+    "when": "isMac && explorerViewletFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "explorer.newFile",
+    "when": "!isMac && explorerViewletFocus"
   },
   // Quick controls on terminal
   {
     "key": "cmd+shift+j",
-    "command": "workbench.action.toggleMaximizedPanel"
+    "command": "isMac && workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "!isMac && workbench.action.toggleMaximizedPanel"
   },
   // Quick controls for editor groups
   {
@@ -38,5 +47,31 @@
     "key": "cmd+shift+d",
     "command": "editor.action.selectHighlights",
     "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "!isMac && editorTextFocus"
+  },
+  // Copy lines top / down on Linux like MacOS
+  {
+    "key": "shift+alt+down",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "!isMac && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+alt+down",
+    "command": "-editor.action.copyLinesDownAction",
+    "when": "!isMac && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+up",
+    "command": "editor.action.copyLinesUpAction",
+    "when": "!isMac && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+alt+up",
+    "command": "-editor.action.copyLinesUpAction",
+    "when": "!isMac && editorTextFocus && !editorReadonly"
   }
 ]
