@@ -43,8 +43,8 @@ defaults write -g InitialKeyRepeat -int 10 # = 150 ms, normal minimum is 15 (225
 defaults write -g KeyRepeat -int 1 # = 15 ms, normal minimum is 2 (30 ms)
 
 # git ------------------------------------------------------------------------ #
-git config --global user.name labordem
-git config --global user.email 38043788+labordem@users.noreply.github.com
+rm -f ~/.gitconfig
+ln -sf ~/Setup/shared/git/.gitconfig ~/.gitconfig
 
 # zsh ------------------------------------------------------------------------ #
 touch ~/.zshrc
@@ -76,7 +76,9 @@ ln -sf ~/Setup/shared/vscode/keybindings.json ~/Library/Application\ Support/Cod
 cat ~/Setup/shared/vscode/settings.json | sed 's/^ *\/\/.*//' | jq -r '.["extensions.allowed"] | keys[]' | xargs -I {} code --install-extension {} --force
 
 # aerospace ------------------------------------------------------------------ #
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 brew install --cask nikitabobko/tap/aerospace
+brew tap FelixKratz/formulae && brew install borders
 mkdir -p ~/.config/aerospace
 ln -sf ~/Setup/darwin/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
 ```
