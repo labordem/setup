@@ -167,6 +167,10 @@ in
                 {
                     lockAll = true; # prevents overriding
                     settings = {
+                        "org/gnome/desktop/background" = {
+                            picture-uri = "file:///home/mickael/Setup/shared/pictures/wallpaper.jpg";
+                            picture-uri-dark = "file:///home/mickael/Setup/shared/pictures/wallpaper.jpg";
+                        };
                         "org/gnome/desktop/interface" = {
                             clock-show-weekday = true;
                             enable-hot-corners = false;
@@ -225,6 +229,10 @@ in
                 stateVersion = "25.05";
                 username = "mickael";
                 file = {
+                    pictures = {
+                        source = ../shared/pictures/wallpaper.jpg;
+                        target = "~/Pictures/wallpaper.jpg";
+                    };
                     zsh-aliases = {
                         source = ../shared/zsh/.zsh_aliases;
                         target = "~/.zsh_aliases";
