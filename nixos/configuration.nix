@@ -114,6 +114,12 @@ in
                     *
                     [main]
                     leftmeta = layer(meta_mac)
+                    leftalt = leftalt
+                    [alt]
+                    left = C-left
+                    right = C-right
+                    up = C-up
+                    down = C-down
                     [meta_mac:C]
                     c = C-insert
                     v = S-insert
@@ -129,6 +135,8 @@ in
                     # 9 = A-9
                     left = home
                     right = end
+                    down = pagedown
+                    up = pageup
                     tab = swapm(app_switch_state, A-tab)
                     [app_switch_state:A]
                 '';
@@ -148,8 +156,8 @@ in
             enableSyntaxHighlighting = true;
             shellInit = ''
                 eval "$(starship init zsh)"
-                touch ~/.zshrc
-                source ~/Setup/shared/zsh/.zsh_aliases
+                touch /home/mickael/.zshrc
+                source /home/mickael/Setup/shared/zsh/.zsh_aliases
             '';
         };
         starship = {
@@ -202,7 +210,10 @@ in
                             touchpad = [ "natural-scroll:false" ];
                         };
                         "org/gnome/shell/keybindings" = {
-                            toggle-overview = [ "<Ctrl>space" ];
+                            toggle-overview = [ "<Control>space" "<Control>space" ];
+                            close = ["<Control>q"];
+                            switch-windows = ["<Alt>Tab"];
+                            switch-windows-backward = ["<Shift><Alt>Tab"];
                         };
                     };
                 }
@@ -231,23 +242,23 @@ in
                 file = {
                     pictures = {
                         source = ../shared/pictures/wallpaper.jpg;
-                        target = "~/Pictures/wallpaper.jpg";
+                        target = "/home/mickael/Pictures/wallpaper.jpg";
                     };
                     zsh-aliases = {
                         source = ../shared/zsh/.zsh_aliases;
-                        target = "~/.zsh_aliases";
+                        target = "/home/mickael/.zsh_aliases";
                     };
                     vscode-settings = {
                         source = ../shared/vscode/settings.json;
-                        target = "~/.config/Code/User/settings.json";
+                        target = "/home/mickael/.config/Code/User/settings.json";
                     };
                     vscode-keybindings = {
                         source = ../shared/vscode/keybindings.json;
-                        target = "~/.config/Code/User/keybindings.json";
+                        target = "/home/mickael/.config/Code/User/keybindings.json";
                     };
                     vscode-snippets = {
                         source = ../shared/vscode/global-snippets.code-snippets;
-                        target = "~/.config/Code/User/snippets/global-snippets.code-snippets";
+                        target = "/home/mickael/.config/Code/User/snippets/global-snippets.code-snippets";
                     };
                 };
                 homeDirectory = "/home/mickael";
