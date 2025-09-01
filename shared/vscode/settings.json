@@ -87,6 +87,7 @@
   "workbench.enableExperiments": false,
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
+    "ms-azuretools.vscode-docker": true,
     "a-h.templ": true,
     "adpyke.vscode-sql-formatter": true,
     "alexdauenhauer.catppuccin-noctis-icons": true,
