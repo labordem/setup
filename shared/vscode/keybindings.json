@@ -12,12 +12,14 @@
   },
   // Quick controls on terminal
   {
-    "key": "cmd+shift+j",
-    "command": "isMac && workbench.action.toggleMaximizedPanel"
+    "key": "shift+cmd+j",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "isMac && (panelAlignment == 'center' || panelPosition != 'bottom' && panelPosition != 'top')"
   },
   {
     "key": "ctrl+shift+j",
-    "command": "!isMac && workbench.action.toggleMaximizedPanel"
+    "command": "!isMac && workbench.action.toggleMaximizedPanel",
+    "when": "!isMac && (panelAlignment == 'center' || panelPosition != 'bottom' && panelPosition != 'top')"
   },
   // Quick controls for editor groups
   {
@@ -74,4 +76,5 @@
     "command": "-editor.action.copyLinesUpAction",
     "when": "!isMac && editorTextFocus && !editorReadonly"
   }
+  // New
 ]

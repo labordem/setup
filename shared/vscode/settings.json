@@ -87,7 +87,6 @@
   "workbench.enableExperiments": false,
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
-    "ms-azuretools.vscode-docker": true,
     "a-h.templ": true,
     "adpyke.vscode-sql-formatter": true,
     "alexdauenhauer.catppuccin-noctis-icons": true,
@@ -110,8 +109,9 @@
     "kisstkondoros.vscode-gutter-preview": true,
     "lsl.vscode-templ-go-to-definition": true,
     "mhutchie.git-graph": true,
-    "ms-vscode-remote.remote-ssh": true,
+    "ms-azuretools.vscode-docker": true,
     "ms-vscode-remote.remote-ssh-edit": true,
+    "ms-vscode-remote.remote-ssh": true,
     "ms-vscode.live-server": true,
     "ms-vscode.remote-explorer": true,
     "ms-vscode.remote-repositories": true,
@@ -123,8 +123,9 @@
     "shd101wyy.markdown-preview-enhanced": true,
     "sndst00m.vscode-native-svg-preview": true,
     "stackbreak.comment-divider": true,
-    "streetsidesoftware.code-spell-checker": true,
     "streetsidesoftware.code-spell-checker-french": true,
+    "streetsidesoftware.code-spell-checker": true,
+    "supermaven.supermaven": true,
     "tamasfe.even-better-toml": true,
     "ue.alphabetical-sorter": true,
     "usernamehw.errorlens": true,
@@ -181,9 +182,6 @@
   // https://marketplace.visualstudio.com/items?itemName=alexdauenhauer.catppuccin-noctis-icons
   "workbench.iconTheme": "catppuccin noctis icons",
   "catppuccin-noctis-icons.hidesExplorerArrows": true,
-  // Preview -------------------------------------------------------------------
-  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
-  "livePreview.previewDebounceDelay": 500,
   // New -----------------------------------------------------------------------
   "": ""
 }
