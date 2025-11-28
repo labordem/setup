@@ -85,6 +85,10 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "extensions.autoCheckUpdates": false,
   "workbench.enableExperiments": false,
+  // Javascript & Typescript ---------------------------------------------------
+  "emmet.includeLanguages": {
+    "typescript": "html"
+  },
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
     "a-h.templ": true,
@@ -95,7 +99,6 @@
     "bradlc.vscode-tailwindcss": true,
     "cardinal90.multi-cursor-case-preserve": true,
     "catppuccin.catppuccin-vsc": true,
-    "codeium.codeium": true,
     "dbaeumer.vscode-eslint": true,
     "dkultasev.vs-code-snippet-generator": true,
     "editorconfig.editorconfig": true,
@@ -122,6 +125,7 @@
     "pushqrdx.inline-html": true,
     "shd101wyy.markdown-preview-enhanced": true,
     "sndst00m.vscode-native-svg-preview": true,
+    "SonarSource.sonarlint-vscode": true,
     "stackbreak.comment-divider": true,
     "streetsidesoftware.code-spell-checker-french": true,
     "streetsidesoftware.code-spell-checker": true,

@@ -1,6 +1,5 @@
 {
   "ng.component": {
-    "scope": "typescript",
     "prefix": "ngcomponent",
     "body": [
       "import { ChangeDetectionStrategy, Component } from '@angular/core';",
@@ -11,7 +10,6 @@
       "  template: `",
       "    ${2}",
       "  `,",
-      "  changeDetection: ChangeDetectionStrategy.OnPush",
       "})",
       "export class ${1/(.*)/${1:/pascalcase}/}Component {",
       "  ",
@@ -20,8 +18,26 @@
     ],
     "description": "Angular component"
   },
+  "ng.page": {
+    "prefix": "ngpage",
+    "body": [
+      "import { ChangeDetectionStrategy, Component } from '@angular/core';",
+      "",
+      "@Component({",
+      "  selector: 'app-${1}-page',",
+      "  imports: [],",
+      "  template: `",
+      "    ${2}",
+      "  `,",
+      "})",
+      "export class ${1/(.*)/${1:/pascalcase}/}Page {",
+      "  ",
+      "}",
+      ""
+    ],
+    "description": "Angular page"
+  },
   "ng.service": {
-    "scope": "typescript",
     "prefix": "ngservice",
     "body": [
       "import { Injectable } from '@angular/core';",
@@ -36,14 +52,14 @@
     "description": "Angular service"
   },
   "ng.pipe": {
-    "scope": "typescript",
     "prefix": "ngpipe",
     "body": [
       "import { Pipe, PipeTransform } from '@angular/core'",
       "",
       "@Pipe({ name: '${1}' })",
       "export class ${1/(.*)/${1:/pascalcase}/}Pipe implements PipeTransform {",
-      "  transform(value: string): string {",
+      "  transform(value: string | undefined): string {",
+      "    if (!value) return ''",
       "    return ${2}",
       "  }",
       "}",

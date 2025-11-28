@@ -1,9 +1,0 @@
-[credential]
-    helper = "!case $(uname -s) in Linux*) echo libsecret ;; Darwin*) echo osxkeychain ;; esac"
-[core]
-	editor = code
-[init]
-	defaultBranch = main
-[user]
-	name = labordem
-	email = 38043788+labordem@users.noreply.github.com

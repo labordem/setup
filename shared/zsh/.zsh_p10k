@@ -1,3 +1,28 @@
+# Environment ---------------------------------------------------------------- #
+# Set XDG environment variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
+# Colorize ls output
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Aliases & functions -------------------------------------------------------- #
+alias x='exit'
+alias c='clear'
+alias ls='ls --color=auto'
+alias l='ls'
+alias la='ls -A'
+alias ll='ls -lrthF'
+alias lla='ls -lArthF'
+alias dev='node --run dev'
+alias rmempty="find . -empty -type d -delete"
+alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
+alias cdp='cd ~/Projects'
+
+# Colors --------------------------------------------------------------------- #
 # https://user-images.githubusercontent.com/704406/43988708-64c0fa52-9d4c-11e8-8cf9-c4d4b97a5200.png
 COLOR_BLACK="000"
 COLOR_RED="001"
@@ -8,6 +33,7 @@ COLOR_MAGENTA="005"
 COLOR_CYAN="006"
 COLOR_WHITE="015"
 
+# Powerlevel9k --------------------------------------------------------------- #
 ZSH_DISABLE_COMPFIX=true
 ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE="nerdfont-complete"
@@ -15,7 +41,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     os_icon custom_host dir dir_writable
     vcs
@@ -131,28 +156,55 @@ zsh_go_global() {
 POWERLEVEL9K_CUSTOM_GO_GLOBAL="zsh_go_global"
 POWERLEVEL9K_CUSTOM_GO_GLOBAL_BACKGROUND=$COLOR_BLACK
 
-# Syntax highlighting plugin
-ZSH_HIGHLIGHT_MAXLENGTH=512
-ZSH_HIGHLIGHT_STYLES[comment]='fg='$COLOR_GREEN
+# Syntax highlighting -------------------------------------------------------- #
+# https://github.com/catppuccin/zsh-syntax-highlighting/blob/main/zsh-syntax-highlighting.tera
+ZSH_HIGHLIGHT_STYLES[comment]='fg='$COLOR_BLACK
 ZSH_HIGHLIGHT_STYLES[alias]='fg='$COLOR_BLUE
 ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg='$COLOR_BLUE
-ZSH_HIGHLIGHT_STYLES[builtin]='fg='$COLOR_BLUE
-ZSH_HIGHLIGHT_STYLES[precommand]='fg='$COLOR_BLUE',bold'
-ZSH_HIGHLIGHT_STYLES[command]='fg='$COLOR_BLUE
+ZSH_HIGHLIGHT_STYLES[global-alias]='fg='$COLOR_BLUE
 ZSH_HIGHLIGHT_STYLES[function]='fg='$COLOR_BLUE
-ZSH_HIGHLIGHT_STYLES[hashed-command]='fg='$COLOR_BLUE
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg='$COLOR_RED
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg='$COLOR_MAGENTA
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg='$COLOR_YELLOW
-ZSH_HIGHLIGHT_STYLES[path]='fg='$COLOR_CYAN',underline'
-ZSH_HIGHLIGHT_STYLES[path_prefix]='fg='$COLOR_CYAN',underline'
-ZSH_HIGHLIGHT_STYLES[path_approx]='fg='$COLOR_CYAN',underline'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg='$COLOR_YELLOW
+ZSH_HIGHLIGHT_STYLES[command]='fg='$COLOR_BLUE
+ZSH_HIGHLIGHT_STYLES[precommand]='fg='$COLOR_BLUE',italic'
+ZSH_HIGHLIGHT_STYLES[autodirectory]='fg='$COLOR_YELLOW',italic'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg='$COLOR_YELLOW
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg='$COLOR_YELLOW
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg='$COLOR_CYAN
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg='$COLOR_CYAN
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg='$COLOR_CYAN
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg='$COLOR_CYAN
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg='$COLOR_CYAN
-ZSH_HIGHLIGHT_STYLES[assign]='fg='$COLOR_YELLOW
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg='$COLOR_MAGENTA
+ZSH_HIGHLIGHT_STYLES[builtin]='fg='$COLOR_BLUE
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg='$COLOR_BLUE
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg='$COLOR_BLUE
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg='$COLOR_MAGENTA
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg='$COLOR_MAGENTA
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg='$COLOR_MAGENTA
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg='$COLOR_MAGENTA
+ZSH_HIGHLIGHT_STYLES[command-substitution-quoted]='fg='$COLOR_GREEN
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-quoted]='fg='$COLOR_GREEN
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg='$COLOR_GREEN
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg='$COLOR_RED
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg='$COLOR_GREEN
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg='$COLOR_RED
+ZSH_HIGHLIGHT_STYLES[rc-quote]='fg='$COLOR_GREEN
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg='$COLOR_RED
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[assign]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[named-fd]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg='$COLOR_RED
+ZSH_HIGHLIGHT_STYLES[path]='fg='$COLOR_WHITE',underline'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg='$COLOR_WHITE',underline'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg='$COLOR_WHITE',underline'
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg='$COLOR_WHITE',underline'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg='$COLOR_MAGENTA
+#ZSH_HIGHLIGHT_STYLES[command-substitution]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[command-substitution-unquoted]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[process-substitution]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[arithmetic-expansion]='fg=?'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg='$COLOR_RED
+ZSH_HIGHLIGHT_STYLES[redirection]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[arg0]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[default]='fg='$COLOR_WHITE
+ZSH_HIGHLIGHT_STYLES[cursor]='fg='$COLOR_WHITE

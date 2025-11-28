@@ -75,6 +75,11 @@
     "key": "ctrl+shift+alt+up",
     "command": "-editor.action.copyLinesUpAction",
     "when": "!isMac && editorTextFocus && !editorReadonly"
+  },
+  // Convert quotes to ES6 template and insert an argument. (vit-m.template-strings)
+  {
+    "key": "alt+\\",
+    "command": "template-strings.insertArg",
+    "when": "editorTextFocus && (editorLangId == 'javascript' || editorLangId == 'typescript')"
   }
-  // New
 ]
