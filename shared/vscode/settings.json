@@ -5,13 +5,13 @@
   "window.confirmBeforeClose": "keyboardOnly",
   "window.restoreWindows": "none",
   "window.customTitleBarVisibility": "windowed",
-  // Worbench ------------------------------------------------------------------
-  "workbench.startupEditor": "none",
+  "window.newWindowDimensions": "offset",
   "workbench.activityBar.location": "top",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.statusBar.visible": false,
   "workbench.editor.enablePreviewFromQuickOpen": true,
+  "workbench.settings.editor": "json",
   // Fonts ---------------------------------------------------------------------
   "editor.lineHeight": 22,
   "editor.fontLigatures": false,
@@ -35,7 +35,9 @@
   "explorer.fileNesting.enabled": false,
   "explorer.openEditors.visible": 6,
   "explorer.openEditors.minVisible": 6,
+  // Git -----------------------------------------------------------------------
   "git.openDiffOnClick": false,
+  "diffEditor.renderSideBySide": false,
   // Editor --------------------------------------------------------------------
   "editor.stickyScroll.enabled": false,
   "editor.minimap.enabled": false,
@@ -154,16 +156,13 @@
   "comment-divider.mainHeaderAlign": "left",
   "comment-divider.mainHeaderFiller": "=",
   "comment-divider.subheaderAlign": "left",
-  // Theme ---------------------------------------------------------------------
-  // https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
-  "workbench.colorTheme": "Catppuccin Mocha",
   "catppuccin.extraBordersEnabled": true,
   "catppuccin.accentColor": "lavender",
   "catppuccin.colorOverrides": {
     "mocha": {
-      "base": "#1f1e25",
-      "mantle": "#1f1e25",
-      "crust": "#1f1e25"
+      "base": "#222222",
+      "mantle": "#222222",
+      "crust": "#222222"
     }
   },
   "catppuccin.customUIColors": {
@@ -187,5 +186,6 @@
   "workbench.iconTheme": "catppuccin noctis icons",
   "catppuccin-noctis-icons.hidesExplorerArrows": true,
   // New -----------------------------------------------------------------------
-  "": ""
+  "": "",
+  "workbench.colorTheme": "Catppuccin Mocha"
 }
