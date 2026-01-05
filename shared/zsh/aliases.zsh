@@ -1,4 +1,3 @@
-# Aliases -------------------------------------------------------------------- #
 alias x='exit'
 alias c='clear'
 alias ls='ls --color=auto'
@@ -9,4 +8,4 @@ alias lla='ls -lArthF'
 alias dev='node --run dev'
 alias rmempty="find . -empty -type d -delete"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
-alias cdp='cd ~/Projects'
+alias cdp='cd ~/Developer'

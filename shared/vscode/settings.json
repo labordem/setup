@@ -12,6 +12,7 @@
   "workbench.statusBar.visible": false,
   "workbench.editor.enablePreviewFromQuickOpen": true,
   "workbench.settings.editor": "json",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
   // Fonts ---------------------------------------------------------------------
   "editor.lineHeight": 22,
   "editor.fontLigatures": false,
@@ -93,20 +94,16 @@
   },
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
-    "a-h.templ": true,
-    "adpyke.vscode-sql-formatter": true,
     "alexdauenhauer.catppuccin-noctis-icons": true,
-    "amih90.to": true,
     "angular.ng-template": true,
     "bradlc.vscode-tailwindcss": true,
     "cardinal90.multi-cursor-case-preserve": true,
     "catppuccin.catppuccin-vsc": true,
+    "Codeium.codeium": true,
     "dbaeumer.vscode-eslint": true,
     "dkultasev.vs-code-snippet-generator": true,
     "editorconfig.editorconfig": true,
     "esbenp.prettier-vscode": true,
-    "github.vscode-github-actions": true,
-    "github.vscode-pull-request-github": true,
     "golang.go": true,
     "guilhermetheodoro.typescript-indexing": true,
     "hancel.google-translate": true,
@@ -114,29 +111,19 @@
     "kisstkondoros.vscode-gutter-preview": true,
     "lsl.vscode-templ-go-to-definition": true,
     "mhutchie.git-graph": true,
-    "ms-azuretools.vscode-docker": true,
-    "ms-vscode-remote.remote-ssh-edit": true,
-    "ms-vscode-remote.remote-ssh": true,
-    "ms-vscode.live-server": true,
-    "ms-vscode.remote-explorer": true,
-    "ms-vscode.remote-repositories": true,
     "oliversturm.fix-json": true,
-    "pflannery.vscode-versionlens": true,
     "piotrpalarz.vscode-gitignore-generator": true,
     "pomdtr.excalidraw-editor": true,
     "pushqrdx.inline-html": true,
     "shd101wyy.markdown-preview-enhanced": true,
     "sndst00m.vscode-native-svg-preview": true,
-    "SonarSource.sonarlint-vscode": true,
     "stackbreak.comment-divider": true,
     "streetsidesoftware.code-spell-checker-french": true,
     "streetsidesoftware.code-spell-checker": true,
-    "supermaven.supermaven": true,
     "tamasfe.even-better-toml": true,
     "ue.alphabetical-sorter": true,
     "usernamehw.errorlens": true,
-    "vit-m.template-strings": true,
-    "yoavbls.pretty-ts-errors": true
+    "vit-m.template-strings": true
   },
   // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
   "cSpell.language": "en,fr",
@@ -160,9 +147,9 @@
   "catppuccin.accentColor": "lavender",
   "catppuccin.colorOverrides": {
     "mocha": {
-      "base": "#222222",
-      "mantle": "#222222",
-      "crust": "#222222"
+      "base": "#1F1F1F",
+      "mantle": "#1F1F1F",
+      "crust": "#1F1F1F"
     }
   },
   "catppuccin.customUIColors": {

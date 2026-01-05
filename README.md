@@ -2,140 +2,146 @@
 
 This repository contains all my dotfiles, configurations, and setup scripts to quickly bootstrap a clean, consistent, and reproducible development environment.
 
-## Getting started
+## macOS
 
-Clone the repository into your home directory (~):
+### Getting started
+
+Clone the repository into your `HOME` directory (`~`):
 
 ```bash
 git clone https://github.com/labordem/setup ~/Setup && cd ~/Setup
 ```
 
-## Installation (macOS)
-
-The first step is to install [Xcode](https://apps.apple.com/fr/app/xcode/id497799835?mt=12) from the App Store, then launch it once to accept the license agreement and install the additional command-line developer tools.
-
-After that, run each section of the script sequentially (or execute the entire script at once) to fully set up your development environment.
+### Env
 
 ```bash
-# ============================================================================ #
-# MacOS settings                                                               #
-# ============================================================================ #
-# Dock ----------------------------------------------------------------------- #
-# Enable dock autohide
+mkdir -p ~/.config
+ln -sf ~/Setup/shared/.zshenv ~/.zshenv
+exec zsh
+```
+
+### Update macOS
+
+```bash
+sudo softwareupdate --install --all
+```
+
+> If Xcode is not installed run: `sudo softwareupdate --install Xcode`
+
+### MacOS custom preferences
+
+```bash
 defaults write com.apple.dock "autohide" -bool "true"
-# Disable dock autohide delay
 defaults write com.apple.dock "autohide-delay" -float "0"
-# Finder --------------------------------------------------------------------- #
-# Show file extensions
+defaults write com.apple.dock "show-recents" -bool "false"
+
 defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
-# Show all hidden files (you can toggle the value using "cmd+shift+.")
 defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
-# Show path bar in the bottom of the window
 defaults write com.apple.finder "ShowPathbar" -bool "true"
-# Show status bar in the bottom of the window
 defaults write com.apple.finder "ShowStatusBar" -bool "true"
-# Set column view the default view style for folders without custom setting
 defaults write com.apple.finder "FXPreferredViewStyle" -string "clmv"
-# Set current folder the default search scope when performing a search
 defaults write com.apple.finder "FXDefaultSearchScope" -string SCcf
-# Mouse ---------------------------------------------------------------------- #
-# Set movement speed of the mouse cursor. GUI max is 1
+
 defaults write NSGlobalDomain "com.apple.mouse.scaling" -float "5"
-# Make folders open almost instantly when hovering while dragging
+defaults write NSGlobalDomain "com.apple.trackpad.scaling" -float "2"
 defaults write NSGlobalDomain "com.apple.springing.delay" -float "0.1"
-# Keyboard-------------------------------------------------------------------- #
-# Speed up key repeat rate (UI minimum is 2)
+
 defaults write NSGlobalDomain "KeyRepeat" -int "1"
-# Speed up key repeat delay (UI minimum is 15)
 defaults write NSGlobalDomain "InitialKeyRepeat" -int "10"
-# Enable full keyboard access, allows tab navigation through all UI controls
 defaults write NSGlobalDomain "AppleKeyboardUIMode" -int "2"
-# Change paste and match style shortcut to ⌘⇧V
 defaults write -g NSUserKeyEquivalents '{"com.apple.NSPasteAndMatchStyleMenuItem"="@$V";}'
-# Disable smart quotes
 defaults write NSGlobalDomain "NSAutomaticQuoteSubstitutionEnabled" -bool "false"
-# Disable smart dashes
 defaults write NSGlobalDomain "NSAutomaticDashSubstitutionEnabled" -bool "false"
-# Disable auto-capitalization
 defaults write NSGlobalDomain "NSAutomaticCapitalizationEnabled" -bool "false"
-# Disable double-space → period
 defaults write NSGlobalDomain "NSAutomaticPeriodSubstitutionEnabled" -bool "false"
-# Disable auto spell-check
 defaults write NSGlobalDomain "NSAutomaticSpellingCorrectionEnabled" -bool "false"
-# Safari --------------------------------------------------------------------- #
-# enable developer menu
-defaults write com.apple.Safari.SandboxBroker "ShowDevelopMenu" -bool "true"
+```
 
-# ============================================================================ #
-# Package manager                                                              #
-# ============================================================================ #
-# Install https://brew.sh to manage packages
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# Install some useful packages
-brew install jq
+> **Safari**
+> Open Safari to enable this settings:
+>
+> - `⌘,` > `Advanced` > `Show full website address` > `true`
+> - `⌘,` > `Advanced` > `Show develop menu in menu bar` > `true`
 
-# ============================================================================ #
-# Fonts                                                                        #
-# ============================================================================ #
-# Install https://typeof.net/Iosevka in https://www.nerdfonts.com format
-brew install --cask font-iosevka-nerd-font
+### Terminal
 
-# ============================================================================ #
-# Terminal                                                                     #
-# ============================================================================ #
-# Init configuration file
-touch ~/.zshrc
-# link environment
-ln -sf ~/Setup/shared/zsh/env ~/.config/zsh/env
-echo "source ~/.config/zsh/env" >> ~/.zshrc
-# Link aliases
-ln -sf ~/Setup/shared/zsh/aliases ~/.config/zsh/aliases
-echo "source ~/.config/zsh/aliases" >> ~/.zshrc
-# Install https://github.com/zsh-users/zsh-syntax-highlighting
+```bash
+mkdir -p ~/.config/zsh
+touch ~/.config/zsh/.zshrc
+
 brew install zsh-syntax-highlighting
-echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
-# Install https://github.com/zsh-users/zsh-autosuggestions
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.config/zsh/.zshrc
+
 brew install zsh-autosuggestions
-echo "source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-# Install https://github.com/romkatv/powerlevel10k
+echo "source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.config/zsh/.zshrc
+
 brew install powerlevel10k
-echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
-# Link custom configuration (set XDG_CONFIG_HOME to ~/.config)
-ln -sf ~/Setup/shared/zsh/p10k ~/.config/zsh/p10k
-echo "source ~/.zsh_p10k" >> ~/.zshrc
+echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.config/zsh/.zshrc
 
-# ============================================================================ #
-# Git                                                                          #
-# ============================================================================ #
-git config --global core.excludesfile "~/.config/git/.gitignore"
-echo .DS_Store >> ~/.config/git/.gitignore
-git config --global user.name labordem
-git config --global user.email 38043788+labordem@users.noreply.github.com
-git config --global init.defaultBranch main
+ln -sf ~/Setup/shared/zsh/p10k.zsh ~/.config/zsh/p10k.zsh
+echo "source ~/.config/zsh/p10k.zsh" >> ~/.config/zsh/.zshrc
 
-# ============================================================================ #
-# Visual Studio Code                                                           #
-# ============================================================================ #
-# Install https://code.visualstudio.com
+ln -sf ~/Setup/shared/zsh/aliases.zsh ~/.config/zsh/aliases.zsh
+echo "source ~/.config/zsh/aliases.zsh" >> ~/.config/zsh/.zshrc
+
+brew install --cask font-iosevka-nerd-font
+exec zsh
+```
+
+> Then you should change your **Terminal.app** default profile to use the `Iosevka NF` font at size `14`, with `0.83` interline spacing.
+
+### Git
+
+```bash
+mkdir -p ~/.config/git
+rm -rf ~/.gitconfig
+ln -sf ~/Setup/shared/git/config .config/git/config
+ln -sf ~/Setup/shared/git/ignore .config/git/ignore
+
+exec zsh
+```
+
+### Package manager
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### Visual Studio Code
+
+```bash
 brew install --cask visual-studio-code
-# Link settings
-mkdir -p ~/Library/Application\ Support/Code/User/snippets
+
+mkdir -p ~/Library/Application\ Support/Code/User
 ln -sf ~/Setup/shared/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 ln -sf ~/Setup/shared/vscode/global-snippets.code-snippets ~/Library/Application\ Support/Code/User/snippets/global-snippets.code-snippets
 ln -sf ~/Setup/shared/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
-# Install allowed extensions
+
 cat ~/Setup/shared/vscode/settings.json | sed 's/^ *\/\/.*//' | jq -r '.["extensions.allowed"] | keys[]' | xargs -I {} code --install-extension {} --force
-
-# ============================================================================ #
-# SDKs                                                                         #
-# ============================================================================ #
-brew install node@24
-# switch to node@22
-#brew install node@22 && brew unlink node@24 && brew link node@22
-
-# ============================================================================ #
-# Keyboard layout                                                              #
-# ============================================================================ #
-# Install https://qwerty-fr.org layout
-brew install --cask qwerty-fr
 ```
+
+### Development
+
+```bash
+# Web development
+brew install node@24 && brew link node@24
+
+# Apple development
+brew install --cask sf-symbols
+brew install --cask icon-composer
+```
+
+### Steam
+
+```bash
+brew install --cask steam
+softwareupdate --install-rosetta --agree-to-license
+```
+
+### Keyboard layout
+
+```bash
+brew install qwerty-fr
+```
+
+> Then to `System Preferences` → `Keyboard` → `Input Sources`, click `+`, scroll down to `Others` and add `qwerty-fr`. Then restart macOS.

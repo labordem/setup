@@ -1,0 +1,7 @@
+[core]
+	excludesfile = ~/.config/git/.gitignore
+[user]
+	name = labordem
+	email = 38043788+labordem@users.noreply.github.com
+[init]
+	defaultBranch = main
