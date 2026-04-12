@@ -123,6 +123,9 @@ cat ~/Setup/shared/vscode/settings.json | sed 's/^ *\/\/.*//' | jq -r '.["extens
 ### Development
 
 ```bash
+# Containers
+brew install --cask docker
+
 # Web development
 brew install node@24 && brew link node@24
 

@@ -94,6 +94,8 @@
   },
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
+    "astro-build.astro-vscode": true,
+    "supermaven.supermaven": true,
     "alexdauenhauer.catppuccin-noctis-icons": true,
     "angular.ng-template": true,
     "bradlc.vscode-tailwindcss": true,
