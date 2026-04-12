@@ -1,10 +1,8 @@
 {
-  "$schema": "vscode://schemas/settings/user",
   // Window --------------------------------------------------------------------
   "window.commandCenter": false,
   "window.confirmBeforeClose": "keyboardOnly",
   "window.restoreWindows": "none",
-  "window.customTitleBarVisibility": "windowed",
   "window.newWindowDimensions": "offset",
   "workbench.activityBar.location": "top",
   "workbench.tree.indent": 20,
@@ -22,12 +20,6 @@
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.profiles.osx": {
-    "zsh": {
-      "path": "zsh",
-      "args": ["-i"]
-    }
-  },
   "terminal.integrated.fontWeight": 500,
   "terminal.integrated.fontSize": 14,
   // Sidebar -------------------------------------------------------------------
@@ -94,10 +86,9 @@
   },
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
-    "astro-build.astro-vscode": true,
-    "supermaven.supermaven": true,
     "alexdauenhauer.catppuccin-noctis-icons": true,
     "angular.ng-template": true,
+    "astro-build.astro-vscode": true,
     "bradlc.vscode-tailwindcss": true,
     "cardinal90.multi-cursor-case-preserve": true,
     "catppuccin.catppuccin-vsc": true,
@@ -112,6 +103,7 @@
     "ionutvmi.path-autocomplete": true,
     "kisstkondoros.vscode-gutter-preview": true,
     "lsl.vscode-templ-go-to-definition": true,
+    "meganrogge.template-string-converter": true,
     "mhutchie.git-graph": true,
     "oliversturm.fix-json": true,
     "piotrpalarz.vscode-gitignore-generator": true,
@@ -122,10 +114,10 @@
     "stackbreak.comment-divider": true,
     "streetsidesoftware.code-spell-checker-french": true,
     "streetsidesoftware.code-spell-checker": true,
+    "supermaven.supermaven": true,
     "tamasfe.even-better-toml": true,
     "ue.alphabetical-sorter": true,
-    "usernamehw.errorlens": true,
-    "vit-m.template-strings": true
+    "usernamehw.errorlens": true
   },
   // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
   "cSpell.language": "en,fr",
@@ -146,6 +138,7 @@
   "comment-divider.mainHeaderFiller": "=",
   "comment-divider.subheaderAlign": "left",
   "catppuccin.extraBordersEnabled": true,
+  "catppuccin.workbenchMode": "minimal",
   "catppuccin.accentColor": "lavender",
   "catppuccin.colorOverrides": {
     "mocha": {

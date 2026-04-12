@@ -12,20 +12,30 @@
   },
   // Quick controls on terminal
   {
-    "key": "shift+cmd+j",
+    "key": "cmd+shift+j",
     "command": "workbench.action.toggleMaximizedPanel",
-    "when": "isMac && (panelAlignment == 'center' || panelPosition != 'bottom' && panelPosition != 'top')"
+    "when": "isMac"
   },
   {
     "key": "ctrl+shift+j",
-    "command": "!isMac && workbench.action.toggleMaximizedPanel",
-    "when": "!isMac && (panelAlignment == 'center' || panelPosition != 'bottom' && panelPosition != 'top')"
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "!isMac"
   },
   // Quick controls for editor groups
   {
     "key": "cmd+2",
-    "command": "workbench.action.splitEditor",
-    "when": "!multipleEditorGroups"
+    "command": "workbench.action.moveEditorToNextGroup",
+    "when": "isMac && !multipleEditorGroups"
+  },
+  {
+    "key": "cmd+shift+2",
+    "command": "workbench.action.moveEditorToNextGroup",
+    "when": "isMac"
+  },
+  {
+    "key": "cmd+shift+1",
+    "command": "workbench.action.moveEditorToPreviousGroup",
+    "when": "isMac && multipleEditorGroups"
   },
   // Smart wraps
   {
@@ -38,22 +48,11 @@
     "command": "editor.action.surroundWithSnippet",
     "when": "editorHasSelection"
   },
-  // Quick rename, replace F2
+  // Quick rename
   {
-    "key": "alt+shift+r",
+    "key": "cmd+shift+r",
     "command": "editor.action.rename",
     "when": "editorTextFocus"
-  },
-  // Select highlights
-  {
-    "key": "cmd+shift+d",
-    "command": "editor.action.selectHighlights",
-    "when": "isMac && editorTextFocus"
-  },
-  {
-    "key": "ctrl+shift+d",
-    "command": "editor.action.selectHighlights",
-    "when": "!isMac && editorTextFocus"
   },
   // Copy lines top / down on Linux like MacOS
   {
@@ -75,11 +74,5 @@
     "key": "ctrl+shift+alt+up",
     "command": "-editor.action.copyLinesUpAction",
     "when": "!isMac && editorTextFocus && !editorReadonly"
-  },
-  // Convert quotes to ES6 template and insert an argument. (vit-m.template-strings)
-  {
-    "key": "alt+\\",
-    "command": "template-strings.insertArg",
-    "when": "editorTextFocus && (editorLangId == 'javascript' || editorLangId == 'typescript')"
   }
 ]
