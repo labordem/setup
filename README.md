@@ -41,7 +41,8 @@ defaults write com.apple.dock "autohide" -bool true
 defaults write com.apple.dock "autohide-delay" -float 0
 defaults write com.apple.dock "show-recents" -bool false
 defaults write com.apple.dock "expose-group-apps" -bool true
-defaults write com.apple.dock "static-only" -bool false
+defaults write com.apple.dock "static-only" -bool true
+defaults write com.apple.dock "mru-spaces" -bool false
 
 defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true
 defaults write com.apple.finder "AppleShowAllFiles" -bool true
