@@ -28,6 +28,11 @@
   "explorer.fileNesting.enabled": false,
   "explorer.openEditors.visible": 6,
   "explorer.openEditors.minVisible": 6,
+  // Secondary Sidebar ---------------------------------------------------------
+  "chat.autopilot.enabled": false,
+  "chat.agent.enabled": false,
+  "chat.commandCenter.enabled": false,
+  "chat.notifyWindowOnConfirmation": false,
   // Git -----------------------------------------------------------------------
   "git.openDiffOnClick": false,
   "diffEditor.renderSideBySide": false,

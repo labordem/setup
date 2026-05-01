@@ -74,5 +74,10 @@
     "key": "ctrl+shift+alt+up",
     "command": "-editor.action.copyLinesUpAction",
     "when": "!isMac && editorTextFocus && !editorReadonly"
+  },
+  // Claude code
+  {
+    "key": "shift+cmd+i",
+    "command": "workbench.view.extension.claude-sidebar-secondary"
   }
 ]
