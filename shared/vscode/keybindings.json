@@ -1,4 +1,6 @@
 [
+  // Fix minimize window on MacOS
+  { "key": "cmd+m", "command": "-workbench.action.minimizeWindow" },
   // Create file or/and directory
   {
     "key": "cmd+n",
@@ -47,6 +49,17 @@
     "key": "alt+shift+w",
     "command": "editor.action.surroundWithSnippet",
     "when": "editorHasSelection"
+  },
+  // Select highlights
+  {
+    "key": "cmd+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.selectHighlights",
+    "when": "!isMac && editorTextFocus"
   },
   // Quick rename
   {

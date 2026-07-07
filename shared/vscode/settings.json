@@ -1,9 +1,9 @@
 {
-  // Window --------------------------------------------------------------------
   "window.commandCenter": false,
   "window.confirmBeforeClose": "keyboardOnly",
-  "window.restoreWindows": "none",
+  "window.restoreWindows": "one",
   "window.newWindowDimensions": "offset",
+  "window.customTitleBarVisibility": "windowed",
   "workbench.activityBar.location": "top",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
@@ -11,6 +11,10 @@
   "workbench.editor.enablePreviewFromQuickOpen": true,
   "workbench.settings.editor": "json",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
+  // Themes --------------------------------------------------------------------
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredLightColorTheme": "Light Modern",
+  "workbench.preferredDarkColorTheme": "Dark Modern",
   // Fonts ---------------------------------------------------------------------
   "editor.lineHeight": 22,
   "editor.fontLigatures": false,
@@ -31,8 +35,6 @@
   // Secondary Sidebar ---------------------------------------------------------
   "chat.autopilot.enabled": false,
   "chat.agent.enabled": false,
-  "chat.commandCenter.enabled": false,
-  "chat.notifyWindowOnConfirmation": false,
   // Git -----------------------------------------------------------------------
   "git.openDiffOnClick": false,
   "diffEditor.renderSideBySide": false,
@@ -92,30 +94,20 @@
   // Extensions ----------------------------------------------------------------
   "extensions.allowed": {
     "alexdauenhauer.catppuccin-noctis-icons": true,
-    "angular.ng-template": true,
     "anthropic.claude-code": true,
     "bradlc.vscode-tailwindcss": true,
     "cardinal90.multi-cursor-case-preserve": true,
     "catppuccin.catppuccin-vsc": true,
     "dbaeumer.vscode-eslint": true,
-    "dkultasev.vs-code-snippet-generator": true,
     "editorconfig.editorconfig": true,
     "esbenp.prettier-vscode": true,
-    "golang.go": true,
     "guilhermetheodoro.typescript-indexing": true,
-    "hancel.google-translate": true,
-    "ionutvmi.path-autocomplete": true,
     "kisstkondoros.vscode-gutter-preview": true,
-    "lsl.vscode-templ-go-to-definition": true,
     "meganrogge.template-string-converter": true,
-    "mhutchie.git-graph": true,
     "oven.bun-vscode": true,
     "piotrpalarz.vscode-gitignore-generator": true,
     "pomdtr.excalidraw-editor": true,
     "pushqrdx.inline-html": true,
-    "shd101wyy.markdown-preview-enhanced": true,
-    "sndst00m.vscode-native-svg-preview": true,
-    "stackbreak.comment-divider": true,
     "streetsidesoftware.code-spell-checker-french": true,
     "streetsidesoftware.code-spell-checker": true,
     "tamasfe.even-better-toml": true,
@@ -124,6 +116,7 @@
   },
   // https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code
   "claudeCode.preferredLocation": "panel",
+  "claudeCode.initialPermissionMode": "plan",
   // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
   "cSpell.language": "en,fr",
   "cSpell.diagnosticLevel": "Hint",
@@ -172,8 +165,6 @@
   },
   // https://marketplace.visualstudio.com/items?itemName=alexdauenhauer.catppuccin-noctis-icons
   "workbench.iconTheme": "catppuccin noctis icons",
-  "catppuccin-noctis-icons.hidesExplorerArrows": true,
+  "catppuccin-noctis-icons.hidesExplorerArrows": true
   // New -----------------------------------------------------------------------
-  "": "",
-  "workbench.colorTheme": "Catppuccin Mocha"
 }

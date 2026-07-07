@@ -34,6 +34,17 @@ sudo softwareupdate --install --all
 >
 > Then accept the license agreement and additional dependencies.
 
+### Git
+
+```bash
+mkdir -p ~/.config/git
+rm -rf ~/.gitconfig
+ln -sf ~/Setup/shared/git/config .config/git/config
+ln -sf ~/Setup/shared/git/ignore .config/git/ignore
+
+exec zsh
+```
+
 ### MacOS custom preferences
 
 ```bash
@@ -52,7 +63,7 @@ defaults write com.apple.finder "FXPreferredViewStyle" -string "clmv"
 defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
 
 defaults write NSGlobalDomain "com.apple.mouse.scaling" -float 5
-defaults write NSGlobalDomain "com.apple.trackpad.scaling" -float 2
+defaults write NSGlobalDomain "com.apple.trackpad.scaling" -float 3
 defaults write NSGlobalDomain "com.apple.springing.delay" -float 0.1
 
 defaults write NSGlobalDomain "KeyRepeat" -int 1
@@ -65,10 +76,6 @@ defaults write NSGlobalDomain "NSAutomaticCapitalizationEnabled" -bool false
 defaults write NSGlobalDomain "NSAutomaticPeriodSubstitutionEnabled" -bool false
 defaults write NSGlobalDomain "NSAutomaticSpellingCorrectionEnabled" -bool false
 
-# cmd+opt+s to share
-#defaults write -g NSUserKeyEquivalents -dict-add "Share…" "@~s"
-defaults write -g NSUserKeyEquivalents -dict-add "Partager…" "@~s"
-
 # cmd+shift+v to paste and match style
 #defaults write -g NSUserKeyEquivalents -dict-add "Paste and Match Style" -string "@\$v"
 defaults write -g NSUserKeyEquivalents -dict-add "Coller et adapter le style" -string "@\$v"
@@ -78,6 +85,12 @@ defaults write -g NSUserKeyEquivalents -dict-add "Coller et adapter le style" -s
 >
 > `Safari` > `Settings…` > `Advanced` > `Show full website address` > `true`
 > `Safari` > `Settings…` > `Advanced` > `Show features for web developers` > `true`
+
+### Package manager
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
 ### Terminal
 
@@ -110,23 +123,6 @@ exec zsh
 >
 > `Terminal` > `Settings…` > `Profiles` > `Basic` > `Text` > `Font` > `Change…` > `Iosevka Nerd Font` (size: `14`, interline spacing: `0.83`)
 
-### Git
-
-```bash
-mkdir -p ~/.config/git
-rm -rf ~/.gitconfig
-ln -sf ~/Setup/shared/git/config .config/git/config
-ln -sf ~/Setup/shared/git/ignore .config/git/ignore
-
-exec zsh
-```
-
-### Package manager
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
 ### Visual Studio Code
 
 ```bash
@@ -136,7 +132,6 @@ brew install --cask visual-studio-code
 # Sync settings
 mkdir -p ~/Library/Application\ Support/Code/User
 ln -sf ~/Setup/shared/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
-ln -sf ~/Setup/shared/vscode/global-snippets.code-snippets ~/Library/Application\ Support/Code/User/snippets/global-snippets.code-snippets
 ln -sf ~/Setup/shared/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 
 # Install allowed extensions
@@ -160,12 +155,15 @@ brew link node@24
 # Apple
 brew install --cask sf-symbols
 brew install --cask icon-composer
+brew install cocoapods
 ```
 
 ### Gaming
 
 ```bash
 brew install --cask steam
+# Steam silently installs useless virtual audio devices that pollute your audio outputs.
+sudo rm -rf /Library/Audio/Plug-Ins/HAL/SteamStreaming*
 ```
 
 ### Keyboard layout
