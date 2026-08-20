@@ -30,9 +30,8 @@ sudo softwareupdate --install --all
 
 > **Manual action required**
 >
-> `` > `App Store` > `Develop` > `Xcode` > `Get`
->
-> Then accept the license agreement and additional dependencies.
+> - [Get Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12/).
+> - Then accept the license agreement and additional dependencies.
 
 ### Git
 
@@ -75,6 +74,11 @@ defaults write NSGlobalDomain "NSAutomaticDashSubstitutionEnabled" -bool false
 defaults write NSGlobalDomain "NSAutomaticCapitalizationEnabled" -bool false
 defaults write NSGlobalDomain "NSAutomaticPeriodSubstitutionEnabled" -bool false
 defaults write NSGlobalDomain "NSAutomaticSpellingCorrectionEnabled" -bool false
+
+defaults write com.apple.screencapture "target-screenshot" "clipboard"
+defaults write com.apple.screencapture "target-screenrecording" "file"
+defaults write com.apple.screencapture "captureDelay" -int 5
+killall SystemUIServer
 
 # cmd+shift+v to paste and match style
 #defaults write -g NSUserKeyEquivalents -dict-add "Paste and Match Style" -string "@\$v"

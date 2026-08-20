@@ -13,7 +13,7 @@
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   // Themes --------------------------------------------------------------------
   "window.autoDetectColorScheme": true,
-  "workbench.preferredLightColorTheme": "Light Modern",
+  "workbench.preferredLightColorTheme": "Dark Modern",
   "workbench.preferredDarkColorTheme": "Dark Modern",
   // Fonts ---------------------------------------------------------------------
   "editor.lineHeight": 22,
@@ -33,8 +33,7 @@
   "explorer.openEditors.visible": 6,
   "explorer.openEditors.minVisible": 6,
   // Secondary Sidebar ---------------------------------------------------------
-  "chat.autopilot.enabled": false,
-  "chat.agent.enabled": false,
+  "chat.disableAIFeatures": true,
   // Git -----------------------------------------------------------------------
   "git.openDiffOnClick": false,
   "diffEditor.renderSideBySide": false,
@@ -105,11 +104,8 @@
     "kisstkondoros.vscode-gutter-preview": true,
     "meganrogge.template-string-converter": true,
     "oven.bun-vscode": true,
-    "piotrpalarz.vscode-gitignore-generator": true,
     "pomdtr.excalidraw-editor": true,
     "pushqrdx.inline-html": true,
-    "streetsidesoftware.code-spell-checker-french": true,
-    "streetsidesoftware.code-spell-checker": true,
     "tamasfe.even-better-toml": true,
     "ue.alphabetical-sorter": true,
     "usernamehw.errorlens": true
@@ -165,6 +161,7 @@
   },
   // https://marketplace.visualstudio.com/items?itemName=alexdauenhauer.catppuccin-noctis-icons
   "workbench.iconTheme": "catppuccin noctis icons",
-  "catppuccin-noctis-icons.hidesExplorerArrows": true
+  "catppuccin-noctis-icons.hidesExplorerArrows": true,
   // New -----------------------------------------------------------------------
+  "": ""
 }
